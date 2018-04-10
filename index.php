@@ -174,7 +174,7 @@ if (!isLoggedIn()) {
 <script src="assets/js/jquery-1.12.3.min.js"></script>
 <script>
     $(document).ready(function () {
-        alert();
+
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showLocation);
 

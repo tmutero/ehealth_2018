@@ -110,56 +110,78 @@ if (!isLoggedIn()) {
                         function search()
                         {
 
-                        $conn = mysqli_connect('localhost', 'root', '', 'ehealth');
-                        $symptom = $_POST['search'];
+                            $conn = mysqli_connect('localhost', 'root', '', 'ehealth');
+                            $symptom = $_POST['search'];
+                            $user = $_SESSION['user']['id'];
 
-                        $sql = "SELECT  DISTINCT disease_id,name FROM symptoms WHERE name ='$symptom'";
+                            $sql = "SELECT  DISTINCT disease_id,name FROM symptoms WHERE name ='$symptom'";
 
-                        $result = mysqli_query($conn, $sql);
-                        ?>
-                            <div class="alert-success"><label>Are you feeling the following</label></div>
-                        <?php
-                        while ($row = mysqli_fetch_array($result)) {
+                            $result = mysqli_query($conn, $sql);
+                            $num = mysqli_num_rows($result);
 
+                            if ($num == 0) {
+                                ?>
+                                <div class="danger">
+                                    <h4>Error could not find any symptom match</h4>
 
-                                $symptom1 = $row['name'];
+                                </div>
+                                <?php
 
-                                 $disease = $row['disease_id'];
-
-                                $select = "SELECT DISTINCT * FROM `symptoms` WHERE disease_id='$disease'  AND `name`!='$symptom'";
-                                $run_select = mysqli_query($conn, $select);
-
-                                 while ($row=mysqli_fetch_array($run_select)){
-                                     $id = $row['id'];
-                                     $name = $row['name'];
-                                     ?>
-                                     <form method="post" action="thirdSearch.php">
-
-                                         <div class="form-check">
-                                             <input type="checkbox" onclick="example()" class="form-check-input" id="result" name="result[]" value="<?php
+                            } else {
 
 
-                                             echo $name;
+                                ?>
+                                <div class="alert-success"><label>Are you feeling the following</label></div>
+                                <?php
+                                $query = "INSERT INTO future (symptom,found,user_id) 
+						                       VALUES('$symptom','1', '$user')";
 
-                                             ?>">
-                                             <label class="form-check-label" for="exampleCheck1"><?php echo $name;?></label>
+                                mysqli_query($conn, $query);
+                                while ($row = mysqli_fetch_array($result)) {
+                                    $symptom1 = $row['name'];
+                                    $disease = $row['disease_id'];
+                                    $select = "SELECT DISTINCT * FROM `symptoms` WHERE disease_id='$disease'  AND `name` !='$symptom'";
+                                    $run_select = mysqli_query($conn, $select);
+                                    $num = mysqli_num_rows($result);
+
+                                    if ($num == 1) {
+                                        $row = mysqli_fetch_array($run_select);
+
+                                        echo $user;
 
 
-                                         </div>
+                                    } else {
+                                        while ($row = mysqli_fetch_array($run_select)) {
+                                            $id = $row['id'];
+                                            $name = $row['name'];
+                                            $num = mysqli_num_rows($result);
 
+                                            ?>
+                                            <form method="post" action="thirdSearch.php">
 
-                                  <?php
+                                            <div class="form-check">
+                                                <input type="checkbox" onclick="example()" class="form-check-input"
+                                                       id="result"
+                                                       name="result[]" value="<?php echo $name; ?>">
+                                                <label class="form-check-label"
+                                                       for="exampleCheck1"><?php echo $name; ?></label>
+                                            </div>
+                                            <?php
 
-                                   }
+                                        }
 
-                                 }
-                                 ?>
-                            <button type="submit"  name="thirdSearch_btn" class="btn btn-primary">Submit</button>
-                            </form>
+                                    }
 
-                            <?php
+                                }
+                                ?>
+                                <button type="submit" name="thirdSearch_btn" class="btn btn-primary">Submit</button>
+                                </form>
+
+                                <?php
+
+                            }
+
                         }
-
 
                         ?>
                         <script src="assets/js/jquery-1.12.3.min.js"></script>
@@ -168,8 +190,6 @@ if (!isLoggedIn()) {
 
                             function example() {
                                 var result = $("#result").val();
-
-
 
 
                             }
@@ -189,7 +209,7 @@ if (!isLoggedIn()) {
 <script src="assets/js/jquery-1.12.3.min.js"></script>
 <script>
     $(document).ready(function () {
-        alert();
+
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showLocation);
 
@@ -230,7 +250,6 @@ if (!isLoggedIn()) {
 <script src="assets/js/easypiechart-data.js"></script>
 <script src="assets/js/bootstrap-datepicker.js"></script>
 <script src="assets/js/custom.js"></script>
-
 
 
 </body>

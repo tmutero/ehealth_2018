@@ -100,26 +100,26 @@ if (!isLoggedIn()) {
                             search();
                         }
 
-
                         function search()
-
                         {
                             include('conn.php');
-
+                            $user = $_SESSION['user']['id'];
                             $aDoor = $_POST['result'];
                             $N = count($aDoor);
+                            $sql = "SELECT * FROM future WHERE user_id ='$user' ORDER BY id DESC";
+                            $result = mysqli_query($conn, $sql);
+                            $row=mysqli_fetch_array($result);
+                            $first_symptom=$row['symptom'];
+                            echo $first_symptom;
+
+                            $num = mysqli_num_rows($result);
                             if ($N == 1) {
-                                $select = "SELECT s.name, d.disease as disease FROM symptoms s, disease d WHERE name='$aDoor[0]' AND s.disease_id=d.id";
+                                $select = "SELECT DISTINCT s.name,  d.disease as disease FROM symptoms s, disease d WHERE name='$aDoor[0]' AND s.disease_id=d.id";
                                 $run_select = mysqli_query($conn, $select);
 
                                 $row = mysqli_fetch_array($run_select);
                                 $disease = $row['disease'];
 
-
-//                                $select_doctors = "SELECT id, ( 6371 * acos( cos( radians(30.916772) ) *
-//                                cos( radians( `latitude` ) ) * cos( radians( `longitude` ) - radians(-17.8165877) )
-//                                + sin( radians(30.916772) ) *sin( radians( `latitude` ) ) ) )
-//                                AS distance FROM facility  ORDER BY distance LIMIT 0 , 20;";
 
                                 ?>
                                 <div class="alert alert-info">
@@ -149,10 +149,10 @@ if (!isLoggedIn()) {
                                     $run_select2 = mysqli_query($conn, $select_doc);
                                     while ($rows = mysqli_fetch_array($run_select2)) {
                                         $doc_contact = $rows['doc_contact'];
-                                        $facility_name=$rows['facility_name'];
+                                        $facility_name = $rows['facility_name'];
                                         $doc = $rows['doc'];
                                         $facility_address = $rows['facility_address'];
-                                        $distance=$rows['distance'];
+                                        $distance = $rows['distance'];
                                         ?>
                                         <tr>
                                             <td><?php echo $facility_name; ?></td>
@@ -170,7 +170,6 @@ if (!isLoggedIn()) {
                                     ?>
 
                                 </table>
-
 
 
                                 <?php
@@ -193,6 +192,11 @@ if (!isLoggedIn()) {
                             echo("<p>You selected $N Symptoms(s): ");
                             for ($i = 0; $i < $N; $i++) {
                                 echo($aDoor[$i] . " ");
+                                $symptom = $aDoor[$i];
+//                                $query = "INSERT INTO future (symptom,found,user_id)
+//						                       VALUES('$symptom','1', '$user')";
+//
+//                                mysqli_query($conn, $query);
 
                             }
                             echo("</p>");
@@ -235,7 +239,7 @@ if (!isLoggedIn()) {
 <script src="assets/js/jquery-1.12.3.min.js"></script>
 <script>
     $(document).ready(function () {
-        alert();
+
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showLocation);
 

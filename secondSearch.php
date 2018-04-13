@@ -86,7 +86,7 @@ if (!isLoggedIn()) {
 
     <div class="row">
         <div class="col-lg-12">
-            <h3 class="page-header">Enter Symptom</h3>
+            <h4 class="page-header">Select Symptoms</h4>
         </div>
     </div><!--/.row-->
 
@@ -114,73 +114,94 @@ if (!isLoggedIn()) {
                             $symptom = $_POST['search'];
                             $user = $_SESSION['user']['id'];
 
-                            $sql = "SELECT  DISTINCT disease_id,name FROM symptoms WHERE name ='$symptom'";
+                            $sql = "SELECT disease_id,name FROM symptoms WHERE name ='$symptom'";
 
                             $result = mysqli_query($conn, $sql);
+                            // $row = mysqli_fetch_array($result);
                             $num = mysqli_num_rows($result);
+                            ?>
+                            <div class="panel panel-default">
+                                <div class="panel-body">Are you are feeling those symptoms</div>
 
-                            if ($num == 0) {
-                                ?>
-                                <div class="danger">
-                                    <h4>Error could not find any symptom match</h4>
-
-                                </div>
-                                <?php
-
-                            } else {
-
-
-                                ?>
-                                <div class="alert-success"><label>Are you feeling the following</label></div>
-                                <?php
-                                $query = "INSERT INTO future (symptom,found,user_id) 
-						                       VALUES('$symptom','1', '$user')";
-
-                                mysqli_query($conn, $query);
-                                while ($row = mysqli_fetch_array($result)) {
-                                    $symptom1 = $row['name'];
-                                    $disease = $row['disease_id'];
-                                    $select = "SELECT DISTINCT * FROM `symptoms` WHERE disease_id='$disease'  AND `name` !='$symptom'";
-                                    $run_select = mysqli_query($conn, $select);
-                                    $num = mysqli_num_rows($result);
-
-                                    if ($num == 1) {
-                                        $row = mysqli_fetch_array($run_select);
-
-                                        echo $user;
-
-
-                                    } else {
-                                        while ($row = mysqli_fetch_array($run_select)) {
-                                            $id = $row['id'];
-                                            $name = $row['name'];
-                                            $num = mysqli_num_rows($result);
-
+                                <form class="form-horizontal" id="submit_data">
+                                    <div class="form-group">
+                                        <?php
+                                        if ($num == 0) {
                                             ?>
-                                            <form method="post" action="thirdSearch.php">
+                                            <div class="danger">
+                                                <h4>Error could not find any symptom match</h4>
 
-                                            <div class="form-check">
-                                                <input type="checkbox" onclick="example()" class="form-check-input"
-                                                       id="result"
-                                                       name="result[]" value="<?php echo $name; ?>">
-                                                <label class="form-check-label"
-                                                       for="exampleCheck1"><?php echo $name; ?></label>
                                             </div>
                                             <?php
-
                                         }
+                                        else{
+                                        $query = "INSERT INTO future (symptom,found,user_id)
+						                       VALUES('$symptom','1', '$user')";
 
-                                    }
+                                        mysqli_query($conn, $query);
 
-                                }
-                                ?>
-                                <button type="submit" name="thirdSearch_btn" class="btn btn-primary">Submit</button>
+                                        ?>
+
+                                        <select class="form-control" id="symptom" name="symptom">
+                                            <?php
+                                            while ($row = mysqli_fetch_array($result)) {
+                                                $disease = $row['disease_id'];
+                                                // echo $disease;
+                                                $N = count($disease);
+                                                for ($i = 0; $i < $N; $i++) {
+
+                                                    // echo $disease[$i] . "<br>";
+
+                                                    $num = mysqli_num_rows($result);
+
+
+                                                    ?>
+
+
+                                                    <?php
+
+                                                    $select = "SELECT DISTINCT name FROM `symptoms` WHERE disease_id='$disease'
+                                                  AND name !='$symptom'";
+                                                    $run_select = mysqli_query($conn, $select);
+
+                                                    while ($rows = mysqli_fetch_array($run_select)) {
+                                                        $id = $rows['id'];
+                                                        $name = $rows['name'];
+                                                        ?>
+                                                        <option value=<?php echo $name; ?>><?php echo $name; ?>
+
+
+                                                        </option>
+                                                        <?php
+
+                                                    }
+
+                                                    ?>
+
+
+                                                    <?php
+
+
+                                                }
+                                            }
+
+
+                                            }
+
+                                            ?>
+                                        </select>
+
+
+                                    </div>
+
+                                    <button type="button" class="btn btn-primary" onclick='searchProcessor()'
+                                            class="btn btn-primary">End Searching
+                                    </button>
+                                    <button type="submit" name="" class="btn btn-primary">Next</button>
                                 </form>
-
-                                <?php
-
-                            }
-
+                                <div id="result"></div>
+                            </div>
+                            <?php
                         }
 
                         ?>
@@ -188,8 +209,19 @@ if (!isLoggedIn()) {
                         <script type="text/javascript">
 
 
-                            function example() {
-                                var result = $("#result").val();
+                            function searchProcessor() {
+                                var symptom = $("#symptom").val();
+
+                                $.post("searchProcessor.php", {
+                                        symptom: symptom,
+
+                                    },
+
+                                    function (data) {
+                                        $('#result').html(data);
+                                        $('#submit_data')[0].reset()
+
+                                    });
 
 
                             }

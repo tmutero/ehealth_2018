@@ -109,7 +109,7 @@ if (!isLoggedIn()) {
                             
 
 
-                            <button type="Submit" class="btn btn-primary" 
+                            <button type="Submit" class="btn btn-primary"
                                     name="searchSymptom_btn">Submit Button
                             </button>
 

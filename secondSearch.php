@@ -148,8 +148,9 @@ if (!isLoggedIn()) {
                                         mysqli_query($conn, $query);
 
                                         ?>
+                                        <h4> Select </h4>
 
-                                        <select class="form-control" id="symptom" name="symptom">
+                                        <select class="form-control" id="symptom" name="symptom" onchange='searchProcessor()'>
                                             <?php
                                             while ($row = mysqli_fetch_array($result)) {
                                                 $disease = $row['disease_id'];
@@ -201,10 +202,8 @@ if (!isLoggedIn()) {
 
                                     </div>
 
-                                    <button type="button" class="btn btn-primary" onclick='searchProcessor()'
-                                            class="btn btn-primary">End Searching
-                                    </button>
-                                    <button type="submit" name="" class="btn btn-primary">Next</button>
+
+
                                 </form>
                                 <div id="result"></div>
                             </div>
@@ -231,6 +230,28 @@ if (!isLoggedIn()) {
                                     });
 
 
+
+
+
+                                }
+                            function searchOption3() {
+
+                                var symptoms3 = $("#symptoms").val();
+                                alert(symptoms3);
+                                $.post("searchProcessor.php", {
+                                        symptom3: symptom3,
+
+                                    },
+
+                                    function (data) {
+                                    $('#result').html(data);
+                                    $('#submit_data')[0].reset()
+
+                                });
+                                function stopSearch() {
+                                    alert("Do want to stop");
+
+                                }
                             }
 
 

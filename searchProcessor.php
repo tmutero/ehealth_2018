@@ -21,18 +21,19 @@ function search()
     $first_symptom = $row['symptom'];
 
     $symptom = $_POST['symptom'];
-
+//  echo $first_symptom;
+//  echo $symptom;
 
     //Method to calculate
 //    $select = "SELECT * FROM `symptoms` WHERE name='$symptom'
 //                                                  AND name !='$first_symptom'";
-    $select = "SELECT disease_id, name
+    $select="SELECT disease_id, name
 FROM   disease JOIN symptoms ON disease.id = symptoms.disease_id
 WHERE  name NOT IN  ('$symptom','$first_symptom') 
 GROUP  BY disease_id HAVING COUNT(DISTINCT name) >1";
     //var_dump($select);die();
     $run_select = mysqli_query($conn, $select);
-    ?>
+?>
     <div>
         <h4> Are you feeling the following</h4>
     </div>
@@ -40,10 +41,13 @@ GROUP  BY disease_id HAVING COUNT(DISTINCT name) >1";
     while ($rows = mysqli_fetch_array($run_select)) {
         $id = $rows['disease_id'];
         $name = $rows['name'];
-
+//
+//      echo "<ul class='list-group'>";
+//        echo "<li class='list-group-ite'>" . $name . "</li>";
+//     echo "</ul>";
         ?>
         <ul class="connectedSortable ui-sortable" id="search">
-            <li class="ui-state-default" name="<?php $name; ?>"><?php echo $name; ?></li>
+            <li class="ui-state-default"  name="<?php $name;?>"><?php echo  $name; ?></li>
 
         </ul>
 
@@ -64,14 +68,13 @@ GROUP  BY disease_id HAVING COUNT(DISTINCT name) >1";
             ?><!-- </option>-->
             <option value=<?php echo $name; ?>><?php echo $name; ?></option>
 
-            <?php
+        <?php
         }
         ?>
 
     </select>
-    <button type="submit" name="" class="btn btn-primary">Continue</button>
-    <button type="button" class="btn btn-success" onclick='stopSearch()'
-            class="btn btn-primary">None of above
+    <button type="button" onclick="searchOption3()" class="btn btn-primary">Continue</button>
+    <button type="button" class="btn btn-success" onchange="stopSearch()" class="btn btn-primary">None of above
     </button>
 
 </form>
@@ -82,13 +85,11 @@ GROUP  BY disease_id HAVING COUNT(DISTINCT name) >1";
 ?>
 <script src="assets/js/jquery-1.12.3.min.js"></script>
 <script type="text/javascript">
-    $(function () {
+    $(function() {
 
-        $("#sortable1 li").not('.emptyMessage').click(function () {
+        $("#sortable1 li").not('.emptyMessage').click(function() {
             alert('Clicked list. ' + this.id);
         });
     });
-    function stopSearch() {
 
-    }
 </script>

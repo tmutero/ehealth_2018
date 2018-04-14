@@ -121,20 +121,27 @@ if (!isLoggedIn()) {
                             $num = mysqli_num_rows($result);
                             ?>
                             <div class="panel panel-default">
-                                <div class="panel-body">Are you are feeling those symptoms</div>
 
                                 <form class="form-horizontal" id="submit_data">
                                     <div class="form-group">
                                         <?php
                                         if ($num == 0) {
                                             ?>
-                                            <div class="danger">
-                                                <h4>Error could not find any symptom match</h4>
-
+                                            <div class="alert alert-danger">
+                                                <strong>Error!</strong> Could not find symptom.
                                             </div>
                                             <?php
                                         }
+
                                         else{
+                                            ?>
+                                        <div class="alert alert-success">
+
+                                            <strong>Symptom found</strong>  -Are you feeling the following
+
+
+                                       </div>
+                                        <?php
                                         $query = "INSERT INTO future (symptom,found,user_id)
 						                       VALUES('$symptom','1', '$user')";
 

@@ -7,9 +7,13 @@ if (!isLoggedIn()) {
     $_SESSION['msg'] = "You must log in first";
     header('location: login.php');
 }
-
+$user = $_SESSION['user']['id'];
 if (isset($_POST['symptom'])) {
     search();
+}
+if(isset($_POST['symptom3'])){
+    echo "Yess";
+
 }
 function search()
 {
@@ -57,7 +61,7 @@ GROUP  BY disease_id HAVING COUNT(DISTINCT name) >1";
     ?>
     <div><h4> Please choose the symptom</h4></div>
 <form class="form-horizontal" id="submit_data">
-    <select class="form-control" id="symptoms" name="symptoms">
+    <select class="form-control" id="symptoms3" name="symptoms3">
         <?php
         $run_select1= mysqli_query($conn, $select);
         while ($rows = mysqli_fetch_array($run_select1)) {

@@ -236,7 +236,7 @@ if (!isLoggedIn()) {
                                 }
                             function searchOption3() {
 
-                                var symptoms3 = $("#symptoms").val();
+                                var symptoms3 = $("#symptoms3").val();
                                 alert(symptoms3);
                                 $.post("searchProcessor.php", {
                                         symptom3: symptom3,
@@ -244,7 +244,7 @@ if (!isLoggedIn()) {
                                     },
 
                                     function (data) {
-                                    $('#result').html(data);
+                                    $('#result2').html(data);
                                     $('#submit_data')[0].reset()
 
                                 });

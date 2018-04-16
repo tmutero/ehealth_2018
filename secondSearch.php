@@ -119,6 +119,7 @@ if (!isLoggedIn()) {
                             $result = mysqli_query($conn, $sql);
                             // $row = mysqli_fetch_array($result);
                             $num = mysqli_num_rows($result);
+
                             ?>
                             <div class="panel panel-default">
 
@@ -134,13 +135,13 @@ if (!isLoggedIn()) {
                                         }
 
                                         else{
-                                            ?>
+                                        ?>
                                         <div class="alert alert-success">
 
-                                            <strong>Symptom found</strong>  -Are you feeling the following
+                                            <strong>Symptom found</strong> -Are you feeling the following
 
 
-                                       </div>
+                                        </div>
                                         <?php
                                         $query = "INSERT INTO future (symptom,found,user_id)
 						                       VALUES('$symptom','1', '$user')";
@@ -150,26 +151,18 @@ if (!isLoggedIn()) {
                                         ?>
                                         <h4> Select </h4>
 
-                                        <select class="form-control" id="symptom" name="symptom" onchange='searchProcessor()'>
+                                        <select class="form-control" id="symptom" name="symptom"
+                                                onchange='searchProcessor()'>
                                             <?php
                                             while ($row = mysqli_fetch_array($result)) {
                                                 $disease = $row['disease_id'];
-                                                // echo $disease;
+                                                echo $disease;
                                                 $N = count($disease);
                                                 for ($i = 0; $i < $N; $i++) {
 
-                                                    // echo $disease[$i] . "<br>";
-
                                                     $num = mysqli_num_rows($result);
-
-
-                                                    ?>
-
-
-                                                    <?php
-
                                                     $select = "SELECT DISTINCT name FROM `symptoms` WHERE disease_id='$disease'
-                                                  AND name !='$symptom'";
+                                                    AND name !='$symptom'";
                                                     $run_select = mysqli_query($conn, $select);
 
                                                     while ($rows = mysqli_fetch_array($run_select)) {
@@ -177,8 +170,6 @@ if (!isLoggedIn()) {
                                                         $name = $rows['name'];
                                                         ?>
                                                         <option value=<?php echo $name; ?>><?php echo $name; ?>
-
-
                                                         </option>
                                                         <?php
 
@@ -201,7 +192,6 @@ if (!isLoggedIn()) {
 
 
                                     </div>
-
 
 
                                 </form>
@@ -230,24 +220,23 @@ if (!isLoggedIn()) {
                                     });
 
 
+                            }
 
-
-
-                                }
                             function searchOption3() {
 
                                 var symptoms3 = $("#symptoms3").val();
                                 alert(symptoms3);
                                 $.post("searchProcessor.php", {
-                                        symptom3: symptom3,
+                                        symptoms3: symptoms3,
 
                                     },
 
                                     function (data) {
-                                    $('#result2').html(data);
-                                    $('#submit_data')[0].reset()
+                                        $('#result').html(data);
+                                        $('#submit_data')[0].reset()
 
-                                });
+                                    });
+
                                 function stopSearch() {
                                     alert("Do want to stop");
 

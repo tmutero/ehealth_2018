@@ -121,46 +121,46 @@ if (!isLoggedIn()) {
 
                     <script src="assets/js/jquery-1.12.3.min.js"></script>
                     <script type="text/javascript">
-                     
-                   
-                        function searchProcessor() {
-                                  
-                                    var symptom = $("#symptom").val();
-                                    var latitude;
-                                    
-                                     var longitude; 
-                                    
-                                    $.post("searchProcessor.php", {
-                                            symptom: symptom,
-                                             longitude:29.3054545,
-                                             latitude:31.2411974,
-                                            
-
-
-                                        },
-
-                                        function (data) {
-                                            $('#result').html(data);
-                                            $('#submit_data')[0].reset()
-
-                                        });
-
-
-
-
-                        } function second() {
-                                  
-                                    var symptom1 = $("#x").val();
-                                    alert(symptom1);
-                                    
-
-
-
-
-                        }
-
-
-                    </script>
+//
+//
+//                        function searchProcessor() {
+//
+//                                    var symptom = $("#symptom").val();
+//                                    var latitude;
+//
+//                                     var longitude;
+//
+//                                    $.post("searchProcessor.php", {
+//                                            symptom: symptom,
+//                                             longitude:29.3054545,
+//                                             latitude:31.2411974,
+//
+//
+//
+//                                        },
+//
+//                                        function (data) {
+//                                            $('#result').html(data);
+//                                            $('#submit_data')[0].reset()
+//
+//                                        });
+//
+//
+//
+//
+//                        } function second() {
+//
+//                                    var symptom1 = $("#x").val();
+//                                    alert(symptom1);
+//
+//
+//
+//
+//
+//                        }
+//
+//
+//                    </script>
                     </form>
                 </div>
             </div>

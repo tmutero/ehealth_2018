@@ -119,13 +119,13 @@ if (!isAdmin()) {
                     </thead>
                     <?php
                     include('../conn.php');
-                    $select = "SELECT  `disease`, `notes`, `who_stage`, `date_created` FROM `disease`";
+                    $select = "SELECT  * FROM `disease`";
                     $run_select = mysqli_query($conn, $select);
 
                     while ($rows = mysqli_fetch_array($run_select)) {
                         $disease = $rows['disease'];
-                        $notes = $rows['notes'];
-                        $who_stage = $rows['who_stage'];
+//                        $notes = $rows['notes'];
+//                        $who_stage = $rows['who_stage'];
                         $date_created = $rows['date_created'];
 
                         ?>

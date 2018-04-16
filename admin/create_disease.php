@@ -156,8 +156,6 @@
 							 <thead>
       <tr>
         <th>Disease</th>
-        <th>Description</th>
-        <th>WHO Stage</th>
 		<th>Date Created</th>
         <th>Preview</th>
 
@@ -165,20 +163,18 @@
     </thead>
 								<?php
 								include('../conn.php');
-								$select="SELECT  `disease`, `notes`, `who_stage`, `date_created` FROM `disease`";
+								$select="SELECT  * FROM `disease`";
 								$run_select=mysqli_query($conn,$select);
 								
 								while ($rows=mysqli_fetch_array($run_select)) {
 									$disease=$rows['disease'];
-									$notes=$rows['notes'];
-									$who_stage=$rows['who_stage'];
+
 									$date_created=$rows['date_created'];
 									
 									?>
 									<tr>
 										<td><?php echo $disease; ?></td>
-										<td><?php echo $notes; ?></td>
-										<td><?php echo $who_stage; ?></td>
+
 										<td><?php echo $date_created; ?></td>
 										<td>Preview</td>
 										</tr>

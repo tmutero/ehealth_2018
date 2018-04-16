@@ -103,27 +103,27 @@
 
 		// receive all input values from the form
 		$disease    =  e($_POST['disease']);
-		$who_stage=e($_POST['who_stage']);
-		$notes=e($_POST['notes']);
+		//$who_stage=e($_POST['who_stage']);
+		//$notes=e($_POST['notes']);
 		
 		
 		// form validation: ensure that the form is correctly filled
 		if (empty($disease)) { 
 			array_push($errors, "Disease is required"); 
 		}
-		if (empty($who_stage)) { 
-			array_push($errors, "Who Stage is required"); 
-		}
-		if (empty($notes)) { 
-			array_push($errors, "Disease Description is required"); 
-		}
+//		if (empty($who_stage)) {
+//			array_push($errors, "Who Stage is required");
+//		}
+//		if (empty($notes)) {
+//			array_push($errors, "Disease Description is required");
+//		}
 		
 		// save disease if there are no errors in the form
 		if (count($errors) == 0) {
 			 $date= date("Y-M-D");
 			
-				$query = "INSERT INTO disease (disease, notes,who_stage,date_created) 
-						  VALUES('$disease', '$notes', '$who_stage', '$date')";
+				$query = "INSERT INTO disease (disease,date_created) 
+						  VALUES('$disease',  '$date')";
 						  
 				mysqli_query($db, $query);
 			

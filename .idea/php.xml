@@ -5,4 +5,9 @@
       <path value="C:\xampp\htdocs\ehealth" />
     </include_path>
   </component>
+  <component name="PhpInterpreters">
+    <interpreters>
+      <interpreter home="C:\xampp\xampp-control.exe" id="ced8b25d-7b91-4c62-9862-296493bfccef" name="PHP" debugger_id="php.debugger.XDebug" debugger_extension="C:\xampp\xampp-control.exe" />
+    </interpreters>
+  </component>
 </project>

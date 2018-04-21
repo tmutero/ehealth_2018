@@ -12,7 +12,7 @@
           rel="stylesheet">
 
 </head>
-<body>
+<body style="background-image: url('images/bg.jpg');">
 
 
 

@@ -12,14 +12,15 @@
           rel="stylesheet">
 
 </head>
-<body style="background-image: url('images/bg.jpg');">
+<body style="background-image: url('images/bodybg.gif'); ">
 
 
 
 <div class="row">
     <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
-        <div class="login-panel panel panel-default">
-            <div class="panel-heading">Log in</div>
+        <div class="login-panel panel panel-primary">
+           <center><div class="panel-heading">Smart Health Diagnosis System</div>
+           <h4>Log in</h4></center>
             <div class="panel-body">
                 <form role="form" method="post" action="login.php">
                     <center> <img src="images/logo.jpeg" class="img-responsive" alt="logo" height="150px" width="200px"></center>

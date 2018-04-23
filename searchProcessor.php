@@ -42,6 +42,7 @@ function search()
     $conn = mysqli_connect('localhost', 'root', '', 'ehealth');
     mysqli_query($conn, $query);
     global $first_symptom;
+
     $select = "SELECT DISTINCT name
 FROM   disease JOIN symptoms ON disease.id = symptoms.disease_id
 WHERE  name  NOT IN  ('$symptom','$first_symptom') 
@@ -142,15 +143,10 @@ while ($row = mysqli_fetch_array($run_select)) {
     }
     $first_symptom = $row[0]['symptom'];
     $second_symptom = $row[1]['symptom'];
-    /*end of method*/
 
-
-   // echo $first_symptom;
-   // echo $second_symptom;
-   // echo $symptoms3;
-    $select = "SELECT DISTINCT disease, name, AVG(cutoff) AS cutoffPoints FROM   disease JOIN symptoms ON disease.id = symptoms.disease_id 
+    $select = "SELECT DISTINCT name,disease, AVG(cutoff) AS cutoffPoints FROM   disease JOIN symptoms ON disease.id = symptoms.disease_id 
     WHERE  name   IN  ('$first_symptom','$second_symptom','$symptoms3') 
-    GROUP  BY disease_id ORDER BY  cutoffPoints   ";
+    GROUP  BY disease_id  ORDER BY  cutoffPoints  DESC";
     $run_select = mysqli_query($conn, $select);
     $num = mysqli_num_rows($run_select);
 
@@ -158,6 +154,10 @@ while ($row = mysqli_fetch_array($run_select)) {
 
         echo "<div class='alert alert-danger' role='alert'>No matching disease. Please try again later.</div>";
     } else {
+        $row=mysqli_fetch_array($run_select);
+        $name=$row['disease'];
+        echo  $name;
+
         ?>
         <div class="panel panel-info filterable">
 
@@ -178,9 +178,9 @@ while ($row = mysqli_fetch_array($run_select)) {
                     <tr class="filters">
                         <th><input type="text" class="form-control" placeholder="Firstname" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Lastname" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Doc_Contact" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Doctor Contact" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Facility" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Facility_Contact" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Facility Contact" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Distance" disabled></th>
                     </tr>
                     </thead>
@@ -203,8 +203,8 @@ while ($row = mysqli_fetch_array($run_select)) {
                         echo "<td>" . $doctors['Lastname'] . "</td>";
                         echo "<td>" . $doctors['Doc_Contact'] . "</td>";
                         echo "<td>" . $doctors['Facility'] . "</td>";
-                        echo "<td>" . $doctors['Facility_Contact'].".km from here". "</td>";
-                        echo "<td>" . $doctors['Distance'] . "</td>";
+                        echo "<td>" . $doctors['Facility_Contact']. "</td>";
+                        echo "<td>" . $doctors['Distance'].".km from here". "</td>";
                         echo "<form method='POST'>";
                         echo "<td class='text-center'><a href='appointment.php?&id=" . $doctors['id'] . "' class='glyphicon glyphicon-user'>Book Now</a></td>";
 

@@ -156,7 +156,8 @@ while ($row = mysqli_fetch_array($run_select)) {
     } else {
         $row=mysqli_fetch_array($run_select);
         $name=$row['disease'];
-        echo  $name;
+
+        echo "<div class='alert alert-success' role='alert'>Disease Found          -$name</div>";
 
         ?>
         <div class="panel panel-info filterable">

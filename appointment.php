@@ -1,10 +1,11 @@
 <?php
 include('functions.php');
-//
+include ('conn.php');
 if (!isLoggedIn()) {
     $_SESSION['msg'] = "You must log in first";
     header('location: login.php');
 }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -89,12 +90,28 @@ if (!isLoggedIn()) {
                                     Date Created: <?php echo $_SESSION['user']['date_create']; ?>
                                 </div>
                             </div>
+                            <?php
+                            $doctor = $_GET['id'];
+                            $conn=mysqli_connect('localhost', 'root', '', 'ehealth');
+
+                            $sql = "SELECT * FROM practitioner JOIN facility ON practitioner.facility_id = facility.id  WHERE practitioner.id ='$doctor' ";
+                            $result = mysqli_query($conn, $sql);
+                            $row = mysqli_fetch_array($result);
+                            $firstname = $row['firstname'];
+                            $lastname=$row['lastname'];
+                            $contact_details=$row['contact_details'];
+                            $gender=$row['gender'];
+
+                            $facility=$row['name'];
+                            ?>
                             <div class="panel panel-default">
                                 <div class="panel-heading">Appointment Information</div>
                                 <div class="panel-body">
-                                    Doctor Name: <?php echo "Tafadzwa" ?><br>
-                                    Facility Name: <?php echo "Harare Hospital" ?><br>
-                                    Time: <?php echo "12:20pm" ?><br>
+                                    Doctor Firstname: <?php echo $firstname; ?><br>
+                                    Doctor Lastname: <?php echo $lastname; ?><br>
+                                    Doctor Contact:<?php echo $contact_details;?><br>
+                                    Facility Name: <?php echo $facility; ?><br>
+                                    Time: <?php echo date("h:i:sa"); ?><br>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -102,7 +119,7 @@ if (!isLoggedIn()) {
                                 <textarea class="form-control" name="comment" required></textarea>
                             </div>
                             <div class="form-group">
-                                <input type="submit" name="appointment" id="submit" class="btn btn-primary" value="Make Appointment">
+                                <input type="submit" name="appointment" id="submit" class="btn btn-success" value="Make Appointment">
                             </div>
                         </form>
                     </div>

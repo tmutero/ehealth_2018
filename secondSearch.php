@@ -24,7 +24,7 @@ if (!isLoggedIn()) {
 <body onload="getLocation()">
 <nav class="navbar navbar-static-top custom-header">
     <div class="container-fluid">
-        <div class="navbar-header"><a class="navbar-brand navbar-link" href="#">Smart Health Diagnosis System</a>
+        <div class="navbar-header"><a class="navbar-brand navbar-link" href="index.php">Smart Health Diagnosis System</a>
             <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse">

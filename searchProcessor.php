@@ -213,6 +213,10 @@ while ($row = mysqli_fetch_array($run_select)) {
                     echo "</tr>";
                     echo "</tbody>";
                     echo "</table>";
+                    $sql = "DELETE FROM `tmp` ";
+                    $conn = mysqli_connect('localhost', 'root', '', 'ehealth');
+                    $result = mysqli_query($conn, $sql);
+
 
                     ?>
 

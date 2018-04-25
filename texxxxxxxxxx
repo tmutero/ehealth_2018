@@ -1,0 +1,328 @@
+
+
+                                ?>
+                                <div class="alert-success"><label>Are you feeling the following</label></div>
+                                <?php
+                                $query = "INSERT INTO future (symptom,found,user_id)
+						                       VALUES('$symptom','1', '$user')";
+
+                                mysqli_query($conn, $query);
+                                while ($row = mysqli_fetch_array($result)) {
+                                    $symptom1 = $row['name'];
+                                    $disease = $row['disease_id'];
+                                    $select = "SELECT DISTINCT * FROM `symptoms` WHERE disease_id='$disease'  AND `name` !='$symptom'";
+                                    $run_select = mysqli_query($conn, $select);
+                                    $num = mysqli_num_rows($result);
+
+                                    if ($num == 1) {
+                                        $row = mysqli_fetch_array($run_select);
+
+                                        echo $user;
+
+
+                                    }
+                                    ?>
+
+                                    <form method="post" action="thirdSearch.php" class="form-group">
+                                    <?php
+
+                                        while ($row = mysqli_fetch_array($run_select)) {
+                                            $id = $row['id'];
+                                            $name = $row['name'];
+                                            $num = mysqli_num_rows($result);
+                                        }
+
+//                                       ?>
+
+
+<!--                                            <div class="form-check">-->
+<!--                                                <input type="checkbox" onclick="example()" class="form-check-input"-->
+<!--                                                       id="result"-->
+<!--                                                       name="result[]" value="--><?php //echo $name; ?><!--">-->
+<!--                                                <label class="form-check-label"-->
+<!--                                                       for="exampleCheck1">--><?php //echo $name; ?><!--</label>-->
+<!--                                            </div>-->
+<!--                                            -->
+                                    <?php
+
+
+
+
+
+                                }
+                                ?>
+                                <button type="submit" name="thirdSearch_btn" class="btn btn-primary">Submit</button>
+                                </form>
+
+                                <?php
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+if ($num == 4) {
+
+        $rows = mysqli_fetch_array($run_select);
+        $disease = $rows['disease'];
+
+
+        ?>
+        <div class="alert alert-info">
+            <strong>You Are sufferring from-!</strong><?php echo $disease ?>
+        </div>
+
+
+        <?php
+
+    }
+    if ($num == 2) {
+        echo
+        "Yes 2";
+
+    }
+    if ($num == 3) {
+        echo
+        "Yes 3";
+
+        /*
+         *
+         * SELECT * FROM disease JOIN symptoms ON disease.id = symptoms.disease_id  WHERE name='Muscle pain' or name   IN  ('fever','headache')   ORDER BY cutoff
+        DESC
+         */
+    }
+
+    $res = mysqli_query($conn, "SELECT * FROM   practitioner JOIN facility ON practitioner.facility_id = facility.id ");
+    echo "<h2>  </h2>";
+    echo "   <table class='table table-hover'>";
+    echo " <thead>";
+    echo " <tr>";
+    echo " <th>Firstname</th>";
+    echo " <th>Lastname</th>";
+    echo " <th>Contact Details</th>";
+    echo "  <th>Facility Name</th>";
+    echo "  <th>Distance</th>";
+    echo "  <th>Book Now!</th>";
+    echo " </tr>";
+    echo "  </thead>";
+    echo "  <tbody>";
+    while ($row = mysqli_fetch_array($res)) {
+        ?>
+        <tr>
+            <?php
+            echo "<td>" . $row['firstname'] . "</td>";
+            echo "<td>" . $row['lastname'] . "</td>";
+            echo "<td>" . $row['contact_details'] . "</td>";
+            echo "<td>" . $row['name'] . "</td>";
+            echo "<td>" . $row['name'] . "</td>";
+            echo "<td>" . $row['name'] . "</td>";
+            echo "<td><a href='appointment.php?&appid=" . $row['id'] . "' class='btn btn-primary btn-xs'>Book Now</a></td>";
+
+            ?>
+
+        </tr>
+
+        <?php
+
+
+    }
+
+
+
+
+
+
+                        <?php
+                        include('conn.php');
+                        if (isset($_POST['searchSymptom_btn'])) {
+                            search();
+                        }
+
+
+                        function search()
+                        {
+
+                            $conn = mysqli_connect('localhost', 'root', '', 'ehealth');
+                            $symptom = $_POST['search'];
+                            $user = $_SESSION['user']['id'];
+
+                            $sql = "SELECT disease_id,name FROM symptoms WHERE name = '$symptom'";
+
+                            $result = mysqli_query($conn, $sql);
+                            // $row = mysqli_fetch_array($result);
+                            $num = mysqli_num_rows($result);
+
+                            ?>
+                            <div class="panel panel-default">
+
+                                <form class="form-horizontal" id="submit_data">
+                                    <div class="form-group">
+                                        <?php
+                                        if ($num == 0) {
+                                            ?>
+                                            <div class="alert alert-danger">
+                                                <strong>Error!</strong> Could not find symptom.
+                                            </div>
+                                            <?php
+                                        }
+
+                                        else{
+                                        ?>
+                                        <div class="alert alert-success">
+
+                                            <strong>Symptom found</strong> -Are you feeling the following
+
+
+                                        </div>
+                                        <?php
+                                        $query = "INSERT INTO future (symptom,found,user_id)
+						                       VALUES('$symptom','1', '$user')";
+
+                                        mysqli_query($conn, $query);
+
+                                        ?>
+                                        <h4> Select </h4>
+
+                                        <select class="form-control" id="symptom" name="symptom"
+                                                onchange='searchProcessor()'>
+                                            <option value="" selected="selected" disabled="disabled">Select Symptom
+                                            </option>
+                                            <?php
+                                            while ($row = mysqli_fetch_array($result)) {
+                                                $disease = $row['disease_id'];
+                                                echo $disease;
+                                                $N = count($disease);
+                                                for ($i = 0; $i < $N; $i++) {
+
+                                                    $num = mysqli_num_rows($result);
+                                                    $select = "SELECT DISTINCT name FROM `symptoms` WHERE disease_id='$disease'
+                                                    AND name !='$symptom'";
+                                                    $run_select = mysqli_query($conn, $select);
+
+                                                    while ($rows = mysqli_fetch_array($run_select)) {
+                                                        $id = $rows['id'];
+                                                        $name = $rows['name'];
+                                                        ?>
+                                                        <option value=<?php echo $name; ?>><?php echo $name; ?>
+                                                        </option>
+                                                        <?php
+
+                                                    }
+
+                                                    ?>
+
+
+                                                    <?php
+
+
+                                                }
+                                            }
+
+
+                                            }
+
+                                            ?>
+                                        </select>
+
+
+                                    </div>
+
+
+                                </form>
+                                <div class="">
+                                    <div id="result"></div>
+                                </div>
+
+                            </div>
+                            <?php
+                        }
+
+                        ?>
+                        <script src="assets/js/jquery-1.12.3.min.js"></script>
+                        <script type="text/javascript">
+
+
+                            function searchProcessor() {
+                                var symptom = $("#symptom").val();
+
+                                $.post("searchProcessor.php", {
+                                        symptom: symptom,
+
+                                    },
+
+                                    function (data) {
+                                        $('#result').html(data);
+                                        $('#submit_data')[0].reset()
+
+                                    });
+
+
+                            }
+
+                            function searchOption3() {
+
+                                var symptoms3 = $("#symptoms3").val();
+                                alert(symptoms3);
+                                $.post("searchProcessor.php", {
+                                        symptoms3: symptoms3,
+
+                                    },
+
+                                    function (data) {
+                                        $('#result').html(data);
+                                        $('#submit_data')[0].reset()
+
+                                    });
+
+                                function stopSearch() {
+                                    alert("Do want to stop");
+
+                                }
+                            }
+
+
+                        </script>
+
+<script src="assets/js/jquery-1.12.3.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showLocation);
+
+        } else {
+            $('#location').html('Geolocation is not supported by this browser.');
+        }
+    });
+
+    function showLocation(position) {
+
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        console.log("+++++++++++++++++++++" + latitude);
+        console.log("++++++++++++++++=+++++" + longitude);
+        $.ajax({
+            type: 'POST',
+            url: 'secondSearch.php',
+            data: 'latitude=' + latitude + '&longitude=' + longitude,
+
+            success: function (msg) {
+                if (msg) {
+                    $("#location").html(msg);
+
+                } else {
+                    $("#location").html('Not Available');
+                }
+            }
+        });
+
+    }
+</script>

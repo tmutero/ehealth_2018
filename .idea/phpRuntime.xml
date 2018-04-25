@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PhpRuntimeConfiguration" default_stubs_path="C:\xampp\htdocs\ehealth">
+    <extensions>
+      <extension name="mapscript" enabled="true" />
+    </extensions>
+  </component>
+</project>

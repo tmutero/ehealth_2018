@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 24, 2018 at 05:10 AM
+-- Generation Time: Apr 26, 2018 at 05:38 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 5.6.33
 
@@ -33,8 +33,20 @@ CREATE TABLE `appointment` (
   `date_created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `patient_id` int(11) NOT NULL,
   `doctor_id` int(11) NOT NULL,
-  `status` char(20) NOT NULL
+  `status` char(20) NOT NULL,
+  `comment` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `appointment`
+--
+
+INSERT INTO `appointment` (`id`, `date_created`, `patient_id`, `doctor_id`, `status`, `comment`) VALUES
+(1, '2018-04-26 14:37:50', 1, 1, '1', 'comment'),
+(2, '2018-04-26 14:38:09', 4, 1, '1', 'weleom'),
+(3, '2018-04-26 14:38:54', 4, 1, '1', 'Severe Headache'),
+(4, '2018-04-26 14:39:54', 4, 1, '1', 'Weleocmen '),
+(5, '2018-04-26 15:34:46', 4, 1, '1', 'kdkjf');
 
 -- --------------------------------------------------------
 
@@ -104,9 +116,9 @@ CREATE TABLE `facility` (
 INSERT INTO `facility` (`id`, `name`, `city_id`, `address`, `latitude`, `longitude`) VALUES
 (1, 'Harare Hospital', 2, '266 Harare Drive Willowvale', -17.8356011, 31.0104234),
 (2, 'Chitungwiza General Hospital', 2, 'Chitungwiza Unit K', -18.0130903, 31.0503486),
-(3, 'Mpilo Hospital', 1, 'Mpilo', -20.1557954, 28.5788405),
-(4, 'Bulawayo Central Clinic', 2, 'Bulawayo Central Hospital', -20.13159, 28.4550355),
-(5, 'Gweru Hospital', 1, 'Gweru Road 23 Cresent', -19.4554008, 29.74518);
+(3, 'Baines Avenue Clinic', 1, '66 Baines Ave ', -17.8192311, 31.0430568),
+(4, 'Bindura General Hospital', 2, '23 Shashi Road Bindura', -17.2978812, 31.3195807),
+(5, 'Red Cross Clinic', 1, '99 Cameron Street', -17.8326983, 31.0418788);
 
 -- --------------------------------------------------------
 
@@ -127,43 +139,57 @@ CREATE TABLE `future` (
 --
 
 INSERT INTO `future` (`id`, `symptom`, `time`, `found`, `user_id`) VALUES
-(1, 'fatigue', '2018-04-24 01:16:55', 1, 4),
-(2, 'Fever', '2018-04-24 01:17:02', 1, 4),
-(3, 'Constipation', '2018-04-24 01:23:43', 1, 4),
-(4, 'Cough', '2018-04-24 01:23:50', 1, 4),
-(5, 'Cough', '2018-04-24 01:24:06', 1, 4),
-(6, 'Fatigue', '2018-04-24 01:25:00', 1, 4),
-(7, 'Abnormal_Pain', '2018-04-24 01:25:06', 1, 4),
-(8, 'Night_Sweats', '2018-04-24 01:25:44', 1, 4),
-(9, 'Chest_Pain', '2018-04-24 01:25:48', 1, 4),
-(10, 'Chest_Pain', '2018-04-24 01:25:58', 1, 4),
-(11, 'Fatigue', '2018-04-24 01:26:07', 1, 4),
-(12, 'Cough_up_blood', '2018-04-24 01:26:14', 1, 4),
-(13, 'Fatigue', '2018-04-24 01:46:22', 1, 4),
-(14, 'Constipation', '2018-04-24 01:46:40', 1, 4),
-(15, 'Dull_frontal_headache', '2018-04-24 01:46:48', 1, 4),
-(16, 'Constipation', '2018-04-24 01:47:28', 1, 4),
-(17, 'Dull_frontal_headache', '2018-04-24 01:47:35', 1, 4),
-(18, 'fever', '2018-04-24 01:48:34', 1, 4),
-(19, 'Night_Sweats', '2018-04-24 01:48:45', 1, 4),
-(20, 'Abnormal_Pain', '2018-04-24 01:50:48', 1, 4),
-(21, 'fever', '2018-04-24 03:03:08', 1, 15),
-(22, 'Nausea_and_Vomiting', '2018-04-24 03:03:24', 1, 15),
-(23, 'Fatigue', '2018-04-24 03:03:53', 1, 15),
-(24, 'Cough_up_blood', '2018-04-24 03:03:59', 1, 15),
-(25, 'Abnormal_Pain', '2018-04-24 03:04:09', 1, 15),
-(26, 'Severe_Headache', '2018-04-24 03:04:17', 1, 15),
-(27, 'Vomiting', '2018-04-24 03:04:26', 1, 15),
-(28, 'Night_Sweats', '2018-04-24 03:04:33', 1, 15),
-(29, 'Chest_Pain', '2018-04-24 03:04:42', 1, 15),
-(30, 'fever', '2018-04-24 03:07:14', 1, 15),
-(31, 'Muscle_pain', '2018-04-24 03:07:18', 1, 15),
-(32, 'Constipation', '2018-04-24 03:07:47', 1, 4),
-(33, 'Dull_frontal_headache', '2018-04-24 03:07:52', 1, 4),
-(34, 'Fatigue', '2018-04-24 03:08:50', 1, 4),
-(35, 'Abnormal_Pain', '2018-04-24 03:08:57', 1, 4),
-(36, 'chest_pain', '2018-04-24 03:09:24', 1, 4),
-(37, 'Night_Sweats', '2018-04-24 03:09:29', 1, 4);
+(1, 'fever', '2018-04-24 11:19:29', 1, 4),
+(2, 'Jaundice_or_Yellow', '2018-04-24 11:19:35', 1, 4),
+(3, 'fatigue', '2018-04-24 11:19:56', 1, 4),
+(4, 'Stomach_Pain', '2018-04-24 11:19:59', 1, 4),
+(5, 'chest_pain', '2018-04-24 11:20:15', 1, 4),
+(6, 'Night_Sweats', '2018-04-24 11:20:19', 1, 4),
+(7, 'Constipation', '2018-04-24 18:18:19', 1, 4),
+(8, 'Dull_frontal_headache', '2018-04-24 18:18:24', 1, 4),
+(9, 'fever', '2018-04-25 20:09:45', 1, 4),
+(10, 'Muscle_pain', '2018-04-25 20:09:50', 1, 4),
+(11, 'fever', '2018-04-25 20:11:39', 1, 4),
+(12, 'Muscle_pain', '2018-04-25 20:11:43', 1, 4),
+(13, 'fever', '2018-04-25 20:15:02', 1, 4),
+(14, 'Jaundice_or_Yellow', '2018-04-25 20:15:06', 1, 4),
+(15, 'Cold', '2018-04-25 20:16:30', 1, 4),
+(16, 'Jaundice_or_Yellow', '2018-04-25 20:17:02', 1, 4),
+(17, 'fatigue', '2018-04-25 20:17:16', 1, 4),
+(18, 'Severe_Headache', '2018-04-25 20:17:20', 1, 4),
+(19, 'Night_Sweats', '2018-04-25 20:17:38', 1, 4),
+(20, 'Hypotension', '2018-04-25 20:21:50', 1, 4),
+(21, 'Jaundice_or_Yellow', '2018-04-25 20:22:01', 1, 4),
+(22, 'Slow_Heart_Beat', '2018-04-25 20:22:15', 1, 4),
+(23, 'fever', '2018-04-25 20:22:49', 1, 4),
+(24, 'Slow_Heart_Beat', '2018-04-25 20:23:05', 1, 4),
+(25, 'fever', '2018-04-25 21:33:13', 1, 4),
+(26, 'Nausea_and_Vomiting', '2018-04-25 21:33:21', 1, 4),
+(27, 'Jaundice_or_Yellow', '2018-04-25 21:33:38', 1, 4),
+(28, 'headache', '2018-04-25 21:33:50', 1, 4),
+(29, 'Nausea_and_Vomiting', '2018-04-25 21:33:54', 1, 4),
+(30, 'Muscle_pain', '2018-04-25 21:34:01', 1, 4),
+(31, 'Fever', '2018-04-25 21:34:09', 1, 4),
+(32, 'chest_pain', '2018-04-25 21:34:23', 1, 4),
+(33, 'Night_Sweats', '2018-04-25 21:34:26', 1, 4),
+(34, 'fatigue', '2018-04-25 21:36:54', 1, 4),
+(35, 'Cough_up_blood', '2018-04-25 21:37:03', 1, 4),
+(36, 'Vomiting', '2018-04-25 21:37:14', 1, 4),
+(37, 'fever', '2018-04-26 02:46:35', 1, 4),
+(38, 'Headache', '2018-04-26 02:46:43', 1, 4),
+(39, 'fatigue', '2018-04-26 02:47:25', 1, 4),
+(40, 'Cough_up_blood', '2018-04-26 02:47:32', 1, 4),
+(41, 'chest_pain', '2018-04-26 02:47:51', 1, 4),
+(42, 'Night_Sweats', '2018-04-26 02:47:55', 1, 4),
+(43, 'fever', '2018-04-26 14:21:41', 1, 4),
+(44, 'fever', '2018-04-26 14:21:41', 1, 4),
+(45, 'Jaundice_or_Yellow', '2018-04-26 14:21:48', 1, 4),
+(46, 'fever', '2018-04-26 14:39:32', 1, 4),
+(47, 'Nausea_and_Vomiting', '2018-04-26 14:39:36', 1, 4),
+(48, 'fatigue', '2018-04-26 15:34:16', 1, 4),
+(49, 'Muscle_Pain', '2018-04-26 15:34:21', 1, 4),
+(50, 'Abnormal_Pain', '2018-04-26 15:36:24', 1, 4),
+(51, 'Severe_Headache', '2018-04-26 15:36:42', 1, 4);
 
 -- --------------------------------------------------------
 
@@ -190,7 +216,7 @@ CREATE TABLE `practitioner` (
 INSERT INTO `practitioner` (`id`, `firstname`, `lastname`, `contact_details`, `date_created`, `gender`, `facility_id`, `speciality`, `disease_id`) VALUES
 (1, 'Tafadzwa', 'Mutero', '0775 939 233', '2018-Mar-Mon', 'M', 1, 'Surgeon Doctor', 2),
 (2, 'Lee ', 'Kaliyati', '073345732', '', 'M', 3, 'Surgeon', 0),
-(3, 'Wadzaanai', 'Mufaro', 'tafadzwa@gmail.com', '', 'F', 4, 'General Practitioner', 0),
+(3, 'Wadzaanai', 'Mufaro', 'tafadzwa@gmail.com', '', 'F', 5, 'General Practitioner', 0),
 (4, 'Tafadzwa', 'Tendekai', '0776 362 638', '2018-Apr-Thu', 'M', 2, '', 0),
 (5, 'Eve', 'Beura', '07887 279 27', '2018-Apr-Fri', 'F', 4, '', 0);
 
@@ -285,7 +311,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `username`, `email`, `user_type`, `password`, `date_create`, `longitude`, `latitude`) VALUES
 (2, 'admin', 'admin@gmail.com', 'admin', 'admin', '2018-04-19 02:05:50', '0.000000', '0.000000'),
 (3, 't', 't@gmail.com', 'admin', 'e358efa489f58062f10dd7316b65649e', '2018-04-19 02:05:50', '0.000000', '0.000000'),
-(4, 'tafadzwa', 'tafadzwa@gmail.com', 'user', '154072a750541f54250de83a125003a4', '2018-04-24 03:08:47', '31.346791', '-17.291416'),
+(4, 'tafadzwa', 'tafadzwa@gmail.com', 'user', '154072a750541f54250de83a125003a4', '2018-04-24 11:20:16', '31.346814', '-17.291441'),
 (5, 'tafadzwa', 'tafadzwa@yahoo.com', 'user', '154072a750541f54250de83a125003a4', '2018-04-19 02:05:50', '0.000000', '0.000000'),
 (6, 'wadza', 'wadzwa@yahoo.com', 'user', '3a912fdb3a2866feb8f002c72a8f2ae5', '2018-04-19 02:05:50', '0.000000', '0.000000'),
 (7, 'tanaka', 'tanaka@gmail.com', 'user', '0292e031195ca50fed149b421c7df329', '2018-04-19 02:05:50', '0.000000', '0.000000'),
@@ -370,7 +396,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `city`
@@ -394,7 +420,7 @@ ALTER TABLE `facility`
 -- AUTO_INCREMENT for table `future`
 --
 ALTER TABLE `future`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `practitioner`
@@ -412,7 +438,7 @@ ALTER TABLE `symptoms`
 -- AUTO_INCREMENT for table `tmp`
 --
 ALTER TABLE `tmp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `users`

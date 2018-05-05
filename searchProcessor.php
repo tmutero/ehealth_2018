@@ -1,6 +1,6 @@
 <?php
 include('conn.php');
-//$conn = mysqli_connect('localhost', 'root', '', 'ehealth');
+$conn = mysqli_connect('localhost', 'root', '', 'ehealth');
 include('functions.php');
 include('conn.php');
 if (!isLoggedIn()) {
@@ -22,6 +22,44 @@ if (isset($_POST['symptoms3'])) {
     search2();
 
 }
+if (isset($_POST['key'])) {
+    ?>
+    <table class="table  table-hover">
+        <tbody>
+        <?php
+        $count = 0;
+        $key = $_POST['key'];
+        $key = addslashes($key);
+        $sql = mysqli_query($conn, "select  * from symptoms WHERE name LIKE '%$key%'") or die(mysqli_error());
+        While ($row = mysqli_fetch_array($sql)) {
+            $count++;
+            $name = $row['name'];
+            $id = $row['id'];
+            if ($count <= 10) {
+                ?>
+
+                <tr>
+
+                    <td>&nbsp;<?php echo $name; ?> </td>
+
+                    <td>
+                        <button type="button" class="add" id="<?php echo $name; ?>">Add</button>
+                    </td>
+
+                </tr>
+
+            <?php }
+        }
+        if ($count == "") {
+            echo "no match Found";
+        } else {
+            ?>
+        <?php } ?>
+        </tbody>
+    </table>
+    <?php
+}
+
 if (isset($_POST['lat'])) {
     $user = $_SESSION['user']['id'];
     $lat = $_POST['lat'];
@@ -94,43 +132,43 @@ GROUP  BY disease_id ";
 
 function search2()
 {
-$conn = mysqli_connect('localhost', 'root', '', 'ehealth');
-$user = $_SESSION['user']['id'];
-$symptoms3 = $_POST['symptoms3'];
-/*selects user cordinates*/
-$select_user = "SELECT longitude,latitude FROM users WHERE id ='$user' ";
-$conn = mysqli_connect('localhost', 'root', '', 'ehealth');
-$result = mysqli_query($conn, $select_user);
-$row = mysqli_fetch_array($result);
+    $conn = mysqli_connect('localhost', 'root', '', 'ehealth');
+    $user = $_SESSION['user']['id'];
+    $symptoms3 = $_POST['symptoms3'];
+    /*selects user cordinates*/
+    $select_user = "SELECT longitude,latitude FROM users WHERE id ='$user' ";
+    $conn = mysqli_connect('localhost', 'root', '', 'ehealth');
+    $result = mysqli_query($conn, $select_user);
+    $row = mysqli_fetch_array($result);
 
-$latitudeFrom = $row['latitude'];
-$longitudeFrom = $row['longitude'];
+    $latitudeFrom = $row['latitude'];
+    $longitudeFrom = $row['longitude'];
 
-$select = "SELECT  `id`, `name`, `city_id`, `address`, `latitude`, `longitude` FROM `facility`";
-$run_select = mysqli_query($conn, $select);
-while ($row = mysqli_fetch_array($run_select)) {
-    $id=$row['id'];
-    $name = $row['name'];
-    $address = $row['address'];
-    $latitudeTo = $row['latitude'];
-    $longitudeTo = $row['longitude'];
-    $city_id = $row['city_id'];
+    $select = "SELECT  `id`, `name`, `city_id`, `address`, `latitude`, `longitude` FROM `facility`";
+    $run_select = mysqli_query($conn, $select);
+    while ($row = mysqli_fetch_array($run_select)) {
+        $id = $row['id'];
+        $name = $row['name'];
+        $address = $row['address'];
+        $latitudeTo = $row['latitude'];
+        $longitudeTo = $row['longitude'];
+        $city_id = $row['city_id'];
 
 
-    $theta = $longitudeFrom - $longitudeTo;
-    $dist = sin(deg2rad($latitudeFrom)) * sin(deg2rad($latitudeTo)) + cos(deg2rad($latitudeFrom)) * cos(deg2rad($latitudeTo)) * cos(deg2rad($theta));
-    $dist = acos($dist);
-    $dist = rad2deg($dist);
-    $miles = $dist * 60 * 1.1515;
+        $theta = $longitudeFrom - $longitudeTo;
+        $dist = sin(deg2rad($latitudeFrom)) * sin(deg2rad($latitudeTo)) + cos(deg2rad($latitudeFrom)) * cos(deg2rad($latitudeTo)) * cos(deg2rad($theta));
+        $dist = acos($dist);
+        $dist = rad2deg($dist);
+        $miles = $dist * 60 * 1.1515;
 
-    $distance = ($miles * 1.609344);
+        $distance = ($miles * 1.609344);
 
-    $dis = round($distance, 3) . "km from here";
-    $insert ="INSERT INTO `tmp`(`name`, `city_id`, `address`, `distance`,`user_id`,`facility_id`) 
+        $dis = round($distance, 3) . "km from here";
+        $insert = "INSERT INTO `tmp`(`name`, `city_id`, `address`, `distance`,`user_id`,`facility_id`) 
           VALUES ('$name','$city_id','$address','$distance','$user','$id')";
-    $run_insert=mysqli_query($conn,$insert);
+        $run_insert = mysqli_query($conn, $insert);
 
-}
+    }
 
 
     /*end*/
@@ -154,8 +192,8 @@ while ($row = mysqli_fetch_array($run_select)) {
 
         echo "<div class='alert alert-danger' role='alert'>No matching disease. Please try again later.</div>";
     } else {
-        $row=mysqli_fetch_array($run_select);
-        $name=$row['disease'];
+        $row = mysqli_fetch_array($run_select);
+        $name = $row['disease'];
 
         echo "<div class='alert alert-success' role='alert'>Disease Found          -$name</div>";
 
@@ -204,8 +242,8 @@ while ($row = mysqli_fetch_array($run_select)) {
                         echo "<td>" . $doctors['Lastname'] . "</td>";
                         echo "<td>" . $doctors['Doc_Contact'] . "</td>";
                         echo "<td>" . $doctors['Facility'] . "</td>";
-                        echo "<td>" . $doctors['Facility_Contact']. "</td>";
-                        echo "<td>" . $doctors['Distance'].".km from here". "</td>";
+                        echo "<td>" . $doctors['Facility_Contact'] . "</td>";
+                        echo "<td>" . $doctors['Distance'] . ".km from here" . "</td>";
                         echo "<form method='POST'>";
                         echo "<td class='text-center'><a href='appointment.php?&id=" . $doctors['id'] . "' class='glyphicon glyphicon-user'>Book Now</a></td>";
 
@@ -231,13 +269,43 @@ while ($row = mysqli_fetch_array($run_select)) {
 
 
 }
+
 ?>
 <script src="assets/js/jquery-1.12.3.min.js"></script>
+
 <script type="text/javascript">
     $(function () {
 
         $("#search li").not('.emptyMessage').click(function () {
             alert('Symptoms. ' + this.id);
+        });
+    });
+
+
+    $(function () {
+        $(".add").click(function () {
+            var element = $(this);
+            var info = element.attr("id");
+
+            $.ajax({
+                type: "POST",
+                url: "addSymptom.php",
+                data: ({info: info}),
+                success: function(data){
+                    $(".result2").html(data);
+                                  }
+
+            }
+
+            );
+
+            $(this).parent().parent().fadeOut(300, function () {
+                $(this).remove();
+            });
+
+
+            return false;
+
         });
     });
 

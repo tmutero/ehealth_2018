@@ -103,6 +103,35 @@ if (!isLoggedIn()) {
                             $gender=$row['gender'];
 
                             $facility=$row['name'];
+
+
+
+                            if (isset($_POST['appointment'])) {
+                                $patient_id=$_SESSION['user']['id'];
+                                $comment = mysqli_real_escape_string($conn, $_POST['comment']);
+
+
+                                $query = "INSERT INTO appointment (patient_id ,doctor_id ,status ,comment  )
+                              VALUES ( '$patient_id','1' ,'1', '$comment') ";
+
+                                //update table appointment schedule
+
+
+
+                                $result = mysqli_query($conn, $query);
+                                // echo $result;
+                                if ($result) {
+                                    ?>
+                                    <script type="text/javascript">
+                                        alert('Appointment made successfully.');
+                                    </script>
+                                    <?php
+                                    header("Location: appointmentlist.php");
+                                }
+                            }
+
+
+
                             ?>
                             <div class="panel panel-default">
                                 <div class="panel-heading">Appointment Information</div>

@@ -233,10 +233,11 @@ if (!isLoggedIn()) {
 
                 });
 
-            function stopSearch() {
-                alert("Do want to stop");
+        }
 
-            }
+        function stopSearch() {
+            alert("Do want to stop");
+
         }
 
 
@@ -244,27 +245,7 @@ if (!isLoggedIn()) {
 
     <script src="assets/js/jquery-1.12.3.min.js"></script>
     <script>
-        function getLocation() {
-            alert("Allow site to track location");
-            if (navigator.geolocation) {
-                navigator.geolocation.watchPosition(showPosition);
-            } else {
-                x.innerHTML = "Geolocation is not supported by this browser.";}
-        }
 
-        function showPosition(position) {
-
-            var lat=position.coords.latitude;
-            var lon=position.coords.longitude;
-
-
-            $.post("searchProcessor.php", {
-                    lat: lat,
-                    lon:lon,
-
-                });
-
-        }
     </script>
 
 

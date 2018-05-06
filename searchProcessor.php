@@ -30,7 +30,7 @@ if (isset($_POST['key'])) {
         $count = 0;
         $key = $_POST['key'];
         $key = addslashes($key);
-        $sql = mysqli_query($conn, "select  * from symptoms WHERE name LIKE '%$key%'") or die(mysqli_error());
+        $sql = mysqli_query($conn, "select DISTINCT (name), symptoms.id as id from symptoms WHERE name LIKE '%$key%'") or die(mysqli_error());
         While ($row = mysqli_fetch_array($sql)) {
             $count++;
             $name = $row['name'];
@@ -43,7 +43,11 @@ if (isset($_POST['key'])) {
                     <td>&nbsp;<?php echo $name; ?> </td>
 
                     <td>
-                        <button type="button" class="add" id="<?php echo $name; ?>">Add</button>
+
+                        <button type="button" class="add btn btn-info" id="<?php echo $name; ?>">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+
                     </td>
 
                 </tr>

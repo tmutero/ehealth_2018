@@ -19,6 +19,9 @@ if (!isLoggedIn()) {
     <link rel="stylesheet" href="assets/patientassets/css/Google-Style-Login.css">
     <link rel="stylesheet" href="assets/patientassets/css/Pretty-Header.css">
     <link rel="stylesheet" href="assets/patientassets/css/Pretty-Footer.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 
 <body onload="getLocation()">
@@ -46,7 +49,7 @@ if (!isLoggedIn()) {
                                 class="caret"></b></a>
 
                     <ul class="dropdown-menu" role="menu">
-                        <li role="presentation" class="active"><a href="index.php?logout='1">Profile </a></li>
+                        <li role="presentation" class="active"><a href="#">Profile </a></li>
                         <li role="presentation" class="active"><a href="index.php?logout='1">Logout </a></li>
                     </ul>
                 </li>
@@ -60,36 +63,12 @@ if (!isLoggedIn()) {
 <br>
 <div class="container">
     <div class="row">
+
         <div class="col-md-4">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h2 class="text-justify panel-title">System Overview</h2></div>
-                <div class="panel-body">
-                    <span class="text-primary bg-success"> </span>
-                    <img src="assets/patientassets/img/3.png">
-                    <img src="assets/patientassets/img/2.png">
-                    <p>Smart Diagnosis System allows patients to diagnoised them from the symptoms.
-                        Disease output is based on the symptoms from the Patients.</p>
-                    <p>System also allows Patients to book for Appointment from the
-                        Doctors nearest to their point of system use.</p>
-                    <p></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-5">
-            <!--            <div class="hero-unit-2">-->
-            <!--                <form>-->
-            <!--                    <input placeholder="Search any Symptom" class="input-large search-query" type="text" id="key" >-->
-            <!--                    <div class="result">-->
-            <!--                        <div class="loading">-->
-            <!---->
-            <!--                        </div>-->
-            <!--                    </div>-->
-            <!--                </form>-->
-            <!--            </div>-->
             <div class="box box-warning">
                 <div class="box-header with-border">
-                    <h4 class="box-title">Search any Symptoms</h4>
+                    <h4 class="box-title">Search Your Symptoms</h4>
+                    <h5>Add symptoms and submit once</h5>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -106,20 +85,19 @@ if (!isLoggedIn()) {
                         </div>
                     </form>
                 </div>
+                <div id="spinner" class="spinner" style="display:none;">
+
+                    <img id="img-spinner" src="images/spinner.gif" alt="Loading"/>
+                </div>
             </div>
-            <div id="result2"></div>
-
-        </div>
-        <div class="col-md-3">
             <div class="table-responsive">
-                <table class="table">
-                    <thead>
+                <table class="table table-striped"">
+                    <thead class="thead-light">
                     <tr>
-
                         <th>Selected Symptoms</th>
                     </tr>
                     </thead>
-                    <tbody>
+
                     <tr>
                         <?php
                         include('conn.php');
@@ -130,6 +108,7 @@ if (!isLoggedIn()) {
 
                         while ($rows = mysqli_fetch_array($run_select)) {
                         $symptom = $rows['symptom'];
+                        $id=$rows['id'];
 
                         ?>
                     <tr>
@@ -137,6 +116,7 @@ if (!isLoggedIn()) {
 
                         <td><?php echo $symptom; ?>
                         </td>
+                        <td><span class="delete glyphicon glyphicon-minus" id="<?php echo $id; ?>" ></span></td>
 
                     </tr>
                     <?php }
@@ -145,17 +125,50 @@ if (!isLoggedIn()) {
 
                     </tbody>
                 </table>
-                <button type="button" id="btn_search_symptom" onclick="process()" class="btn btn-info btn-md">Search
+
+                <button type="button"  onclick="process()" class="btn btn-info btn-md">Search
                 </button>
 
             </div>
+
         </div>
+        <div class="col-md-8">
+
+               <div id="result2">
+
+
+
+               </div>
+
+        </div>
+
+
     </div>
 </div>
 <footer></footer>
 <script src="assets/patientassets/js/jquery.min.js"></script>
 <script src="assets/patientassets/bootstrap/js/bootstrap.min.js"></script>
 
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#spinner").bind("ajaxSend", function() {
+            $(this).show();
+        }).bind("ajaxStop", function() {
+            $(this).hide();
+        }).bind("ajaxError", function() {
+            $(this).hide();
+        });
+
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(setTimeout(function(){
+        $('#button-submit').click(function() {
+            $('#spinner').show();
+        });
+    }),1000);
+
+</script>
 <script src="assets/js/jquery-1.12.3.min.js"></script>
 <script>
     $(document).ready(function () {
@@ -217,6 +230,26 @@ if (!isLoggedIn()) {
 
             });
     }
+
+    $(function() {
+        $(".delete").click(function(){
+            var element = $(this);
+            var id = element.attr("id");
+
+            if(confirm("Are you sure you want to delete this?"))
+            {
+                $.ajax({
+                    type: "POST",
+                    url: "deleteSymptom.php",
+                    data: ({id: id}),
+                    success: function(){
+                    }
+                });
+                $(this).parent().parent().fadeOut(300, function(){ $(this).remove();});
+            }
+            return false;
+        });
+    });
 </script>
 <script>
     $(document).ready(function () {

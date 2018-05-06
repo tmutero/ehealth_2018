@@ -19,7 +19,7 @@ if (!isLoggedIn()) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ehealth</title>
+    <title>Ehealth</title>
     <link rel="stylesheet" href="assets/patientassets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
     <link rel="stylesheet" href="assets/patientassets/css/styles.css">
@@ -36,7 +36,7 @@ if (!isLoggedIn()) {
             <ul class="nav navbar-nav links">
                 <li role="presentation"><a href="#">Overview </a></li>
                 <li role="presentation"><a href="#">Report </a></li>
-                <li role="presentation"><a href="#" class="custom-navbar"> Feedback<span class="badge">new</span></a></li>
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown"> <?php if (isset($_SESSION['user'])) : ?>

@@ -32,7 +32,7 @@ if (!isLoggedIn()) {
             <ul class="nav navbar-nav links">
                 <li role="presentation"><a href="#">Overview </a></li>
                 <li role="presentation"><a href="#">Report </a></li>
-                <li role="presentation"><a href="#" class="custom-navbar"> Feedback<span class="badge">new</span></a></li>
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown"> <?php if (isset($_SESSION['user'])) : ?>

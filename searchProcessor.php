@@ -297,6 +297,7 @@ function search2()
                 data: ({info: info}),
                 success: function(data){
                     $(".result2").html(data);
+                    window.location.reload();
                                   }
 
             }

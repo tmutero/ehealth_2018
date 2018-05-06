@@ -32,12 +32,18 @@ if (!isLoggedIn()) {
       $num_rows = mysqli_num_rows($result);
       while ($row[] = mysqli_fetch_array($result)) {
       }
-      if ($num_rows == 3) {
 
+      //Algorithm Goes here..
+      /*
+       * First we take many Symptoms here so all
+       *
+       * */
+      if ($num_rows == 3) {
+// loading symptoms from the user here
           $first_symptom = $row[0]['symptom'];
           $second_symptom = $row[1]['symptom'];
           $third_symptom = $row[2]['symptom'];
-
+        // for every symptom it goes into computation where it checks the occurance or number of symptoms which are related to symptoms then pass result to next stage
           $select = "SELECT disease, MAX(mycount) 
 FROM (SELECT disease ,COUNT(disease_id) mycount 
 FROM  disease JOIN symptoms ON disease.id = symptoms.disease_id 
@@ -46,13 +52,6 @@ GROUP BY disease_id) as c; ";
           $run_select = mysqli_query($conn, $select);
           $num = mysqli_num_rows($run_select);
 
-          /*
-           * SELECT disease, MAX(mycount)
-          FROM (SELECT disease ,COUNT(disease_id) mycount
-          FROM  disease JOIN symptoms ON disease.id = symptoms.disease_id
-              WHERE  name  IN  ('chest pain','vomiting','fatigue' IS NOT NULL)
-          GROUP BY disease_id) as c;
-           */
           $row = mysqli_fetch_array($run_select);
           $name = $row['disease'];
 
@@ -77,7 +76,7 @@ GROUP BY disease_id) as c; ";
           $select = "SELECT disease, MAX(mycount) 
 FROM (SELECT disease ,COUNT(disease_id) mycount 
 FROM  disease JOIN symptoms ON disease.id = symptoms.disease_id 
-    WHERE  name  IN  ('$first_symptom','$second_symptom','$third_symptom','$forth_sysmptom'  )
+    WHERE  name  IN  ('$first_symptom','$second_symptom','$third_symptom','$forth_sysmptom'  IS NOT null )
 GROUP BY disease_id) as c;";
 
           $run_select = mysqli_query($conn, $select);
@@ -103,7 +102,33 @@ GROUP BY disease_id) as c;";
           $select = "SELECT disease, MAX(mycount) 
 FROM (SELECT disease ,COUNT(disease_id) mycount 
 FROM  disease JOIN symptoms ON disease.id = symptoms.disease_id 
-    WHERE  name  IN  ('$fifth_sysmptom','$first_symptom','$second_symptom','$third_symptom','$forth_sysmptom'  )
+    WHERE  name  IN  ('$fifth_sysmptom','$first_symptom','$second_symptom','$third_symptom','$forth_sysmptom'  IS NOT null )
+GROUP BY disease_id) as c;";
+
+          $run_select = mysqli_query($conn, $select);
+          $row = mysqli_fetch_array($run_select);
+          $name = $row['disease'];
+
+          ?>
+
+
+          <div class='alert alert-success' role='alert'> Likely Diagnoses -<?php echo $name; ?></div>
+
+
+          <?php
+      }
+      if ($num_rows == 6) {
+          $first_symptom = $row[0]['symptom'];
+          $second_symptom = $row[1]['symptom'];
+          $third_symptom = $row[2]['symptom'];
+          $forth_sysmptom = $row[3]['symptom'];
+          $fifth_sysmptom = $row[4]['symptom'];
+          $sixth_sysmptom = $row[5]['symptom'];
+
+          $select = "SELECT disease, MAX(mycount) 
+FROM (SELECT disease ,COUNT(disease_id) mycount 
+FROM  disease JOIN symptoms ON disease.id = symptoms.disease_id 
+    WHERE  name  IN  ('$fifth_sysmptom','$first_symptom','$second_symptom','$third_symptom','$forth_sysmptom','$sixth_sysmptom'  IS NOT null )
 GROUP BY disease_id) as c;";
 
           $run_select = mysqli_query($conn, $select);
@@ -119,7 +144,7 @@ GROUP BY disease_id) as c;";
           <?php
       }
 
-
+//Haversine Formula Goes here
       $select_user = "SELECT longitude,latitude FROM users WHERE id ='$user' ";
       $conn = mysqli_connect('localhost', 'root', '', 'ehealth');
       $result = mysqli_query($conn, $select_user);
@@ -151,7 +176,7 @@ GROUP BY disease_id) as c;";
           $insert = "INSERT INTO `tmp`(`name`, `city_id`, `address`, `distance`,`user_id`,`facility_id`) 
           VALUES ('$name','$city_id','$address','$distance','$user','$id')";
           $run_insert = mysqli_query($conn, $insert);
-
+//up to here.
 
       }
       ?>
@@ -203,7 +228,9 @@ GROUP BY disease_id) as c;";
                         echo "<td>" . $doctors['Facility_Contact'] . "</td>";
                         echo "<td>" . $doctors['Distance'] . ".km from here" . "</td>";
                         echo "<form method='POST'>";
-                        echo "<td class='text-center'><a href='appointment.php?&id=" . $doctors['id'] . "' class='glyphicon glyphicon-user'>Book Now</a></td>";
+                        echo "<td class='text-center'><a href='appointment.php?&id=" . $doctors['id'] . "' class='glyphicon glyphicon-user'>Reference</a></td>";
+                        
+
 
                     }
                     echo "</tr>";
@@ -226,6 +253,10 @@ GROUP BY disease_id) as c;";
 
   }
 ?>
+
+
+
+
 <script type="text/javascript">
     /*
     Please consider that the JS part isn't production ready at all, I just code it to show the concept of merging filters and titles together !

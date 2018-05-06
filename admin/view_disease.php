@@ -35,7 +35,7 @@ if (!isAdmin()) {
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span></button>
-            <a class="navbar-brand" href="#"><span>E-health</span>Admin</a>
+            <a class="navbar-brand" href="home.php"><span>E-health</span>Admin</a>
             <ul class="nav navbar-top-links navbar-right">
 
 
@@ -67,13 +67,13 @@ if (!isAdmin()) {
         </div>
     </form>
     <ul class="nav menu">
-        <li class="active"><a href="index.html"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
+        <li class="active"><a href="home.php"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
         <li><a href="view_disease.php"><em class="fa fa-calendar">&nbsp;</em> Diseases</a></li>
         <li><a href="view_symptom.php"><em class="fa fa-calendar">&nbsp;</em> Symptoms</a></li>
         <li><a href="view_doctors.php"><em class="fa fa-calendar">&nbsp;</em> Doctors</a></li>
         <li><a href="view_facility.php"><em class="fa fa-bar-chart">&nbsp;</em>Facilities</a></li>
         <li><a href="create_user.php"><em class="fa fa-bar-chart">&nbsp;</em> Create User</a></li>
-        <li><a href="feedback.php"><em class="fa fa-calendar">&nbsp;</em> Feedback</a></li>
+        <li><a href="report.php"><em class="fa fa-calendar">&nbsp;</em> Feedback</a></li>
 
 
         <li><a href="home.php?logout='1'">&nbsp;</em> Logout</a></li>

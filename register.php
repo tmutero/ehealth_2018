@@ -39,19 +39,20 @@
 <!--		</p>-->
 <!--	</form>-->
 
-<body class="bg-dark">
+<body style="background-image: url('images/bodybg.gif'); ">
 
 
 <div class="sufee-login d-flex align-content-center flex-wrap">
     <div class="container">
         <div class="login-content">
             <div class="login-logo">
-                <a href="index.html">
-                    <img class="align-content" src="images/logo.png" alt="">
+                <a href="index.php">
+                    <h4></h4>
                 </a>
             </div>
             <div class="login-form">
                 <form method="post" action="register.php">
+                    <center> <img src="images/logo.jpeg" class="img-responsive" alt="logo" height="150px" width="200px"></center>
                     <?php echo display_error(); ?>
                     <div class="form-group">
                         <label>User Name</label>

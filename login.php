@@ -18,7 +18,7 @@
 
 <div class="row">
     <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
-        <div class="login-panel panel panel-primary">
+        <div class="login-panel panel panel-info">
            <center><div class="panel-heading">Smart Health Diagnosis System</div>
            <h4>Log in</h4></center>
             <div class="panel-body">

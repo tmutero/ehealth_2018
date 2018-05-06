@@ -25,13 +25,13 @@ if (!isLoggedIn()) {
 <body>
 <nav class="navbar navbar-static-top custom-header">
     <div class="container-fluid">
-        <div class="navbar-header"><a class="navbar-brand navbar-link" href="#">Smart Health Diagnosis System</a>
+        <div class="navbar-header"><a class="navbar-brand navbar-link" href="index.php">Smart Health Diagnosis System</a>
             <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav links">
                 <li role="presentation"><a href="#">Overview </a></li>
-                <li role="presentation"><a href="#">Report </a></li>
+                <li role="presentation"><a href="appointmentlist.php">Doctor Reference List </a></li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -71,7 +71,7 @@ if (!isLoggedIn()) {
             </div>
         </div>
 
-        <div class="col-md-9 col-sm-9  user-wrapper">
+        <div class="col-md-7  col-sm-7 user-wrapper">
             <div class="description">
 
 
@@ -80,16 +80,7 @@ if (!isLoggedIn()) {
 
 
                         <form class="form" role="form" method="POST" accept-charset="UTF-8">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">Patient Information</div>
-                                <div class="panel-body">
 
-                                    Patient Name: <?php echo $_SESSION['user']['username']; ?><br>
-                                    Patient IC: <?php echo $_SESSION['user']['id'] ?><br>
-                                    Contact Number: <?php echo $_SESSION['user']['email']; ?><br>
-                                    Date Created: <?php echo $_SESSION['user']['date_create']; ?>
-                                </div>
-                            </div>
                             <?php
                             $doctor = $_GET['id'];
                             $conn=mysqli_connect('localhost', 'root', '', 'ehealth');
@@ -112,9 +103,9 @@ if (!isLoggedIn()) {
 
 
                                 $query = "INSERT INTO appointment (patient_id ,doctor_id ,status ,comment  )
-                              VALUES ( '$patient_id','1' ,'1', '$comment') ";
+                              VALUES ( '$patient_id','$doctor' ,'1', '$comment') ";
 
-                                //update table appointment schedule
+
 
 
 
@@ -123,10 +114,11 @@ if (!isLoggedIn()) {
                                 if ($result) {
                                     ?>
                                     <script type="text/javascript">
-                                        alert('Appointment made successfully.');
+                                        alert("Appointment made successfully");
                                     </script>
                                     <?php
-                                    header("Location: appointmentlist.php");
+
+                                    header("Location: index.php");
                                 }
                             }
 
@@ -134,13 +126,13 @@ if (!isLoggedIn()) {
 
                             ?>
                             <div class="panel panel-default">
-                                <div class="panel-heading">Appointment Information</div>
+                                <div class="panel-heading">Doctor Reference Information</div>
                                 <div class="panel-body">
-                                    Doctor Firstname: <?php echo $firstname; ?><br>
-                                    Doctor Lastname: <?php echo $lastname; ?><br>
-                                    Doctor Contact:<?php echo $contact_details;?><br>
-                                    Facility Name: <?php echo $facility; ?><br>
-                                    Time: <?php echo date("h:i:sa"); ?><br>
+                                    <b>Doctor Firstname:</b><?php echo $firstname; ?><br>
+                                    <b>Doctor Lastname:</b> <?php echo $lastname; ?><br>
+                                    <b>Doctor Contact:</b><?php echo $contact_details;?><br>
+                                    <b>Facility Name:</b> <?php echo $facility; ?><br>
+                                   <b>Time:</b>  <?php echo date("h:i:sa"); ?><br>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -148,7 +140,7 @@ if (!isLoggedIn()) {
                                 <textarea class="form-control" name="comment" required></textarea>
                             </div>
                             <div class="form-group">
-                                <input type="submit" name="appointment" id="submit" class="btn btn-success" value="Make Appointment">
+                                <input type="submit" name="appointment" id="submit" class="btn btn-success" value="Make Reference">
                             </div>
                         </form>
                     </div>

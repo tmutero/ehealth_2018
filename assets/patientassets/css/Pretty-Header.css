@@ -1,5 +1,5 @@
 .custom-header{
-  background: #29bf5a;
+  background:#292c2f;
   padding:20px 40px;
   box-sizing:border-box;
   border:0;
@@ -11,7 +11,7 @@
   font:normal 28px Cookie, Arial, Helvetica, sans-serif;
   line-height:0.5;
   margin-right:40px;
-  background: #0f487c;
+  background:#292c2f;
 }
 
 .custom-header a.navbar-brand.navbar-link span{
@@ -23,7 +23,7 @@
   opacity:0.9;
   text-decoration:none;
   color:#fff;
-  background: #033f8b;
+  background:#292c2f;
   border:0;
 }
 

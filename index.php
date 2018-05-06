@@ -13,18 +13,20 @@ if (!isLoggedIn()) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ehealth</title>
-    <link rel="stylesheet" href="assets/patientassets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
     <link rel="stylesheet" href="assets/patientassets/css/styles.css">
     <link rel="stylesheet" href="assets/patientassets/css/Google-Style-Login.css">
     <link rel="stylesheet" href="assets/patientassets/css/Pretty-Header.css">
     <link rel="stylesheet" href="assets/patientassets/css/Pretty-Footer.css">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="assets/js/jquery-1.12.3.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap.js"></script>
+
 </head>
 
-<body onload="getLocation()">
+<body>
 <nav class="navbar navbar-static-top custom-header">
     <div class="container-fluid">
         <div class="navbar-header"><a class="navbar-brand navbar-link" href="index.php">Smart Health Diagnosis
@@ -36,7 +38,7 @@ if (!isLoggedIn()) {
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav links">
                 <li role="presentation"><a href="#">Overview </a></li>
-                <li role="presentation"><a href="#">Appointment List </a></li>
+                <li role="presentation"><a href="appointmentlist.php">Doctor Reference List </a></li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -91,42 +93,43 @@ if (!isLoggedIn()) {
                 </div>
             </div>
             <div class="table-responsive">
-                <table class="table table-striped"">
-                    <thead class="thead-light">
-                    <tr>
-                        <th>Selected Symptoms</th>
-                    </tr>
-                    </thead>
+                <table class="table table-striped"
+                ">
+                <thead class="thead-light">
+                <tr>
+                    <th>Selected Symptoms</th>
+                </tr>
+                </thead>
 
-                    <tr>
-                        <?php
-                        include('conn.php');
-                        $user = $_SESSION['user']['id'];
+                <tr>
+                    <?php
+                    include('conn.php');
+                    $user = $_SESSION['user']['id'];
 
-                        $select = "SELECT * FROM `future` WHERE user_id='$user'";
-                        $run_select = mysqli_query($conn, $select);
+                    $select = "SELECT * FROM `future` WHERE user_id='$user'";
+                    $run_select = mysqli_query($conn, $select);
 
-                        while ($rows = mysqli_fetch_array($run_select)) {
-                        $symptom = $rows['symptom'];
-                        $id=$rows['id'];
+                    while ($rows = mysqli_fetch_array($run_select)) {
+                    $symptom = $rows['symptom'];
+                    $id = $rows['id'];
 
-                        ?>
-                    <tr>
-
-
-                        <td><?php echo $symptom; ?>
-                        </td>
-                        <td><span class="delete glyphicon glyphicon-minus" id="<?php echo $id; ?>" ></span></td>
-
-                    </tr>
-                    <?php }
                     ?>
+                <tr>
 
 
-                    </tbody>
+                    <td><?php echo $symptom; ?>
+                    </td>
+                    <td><span class="delete glyphicon glyphicon-minus" id="<?php echo $id; ?>"></span></td>
+
+                </tr>
+                <?php }
+                ?>
+
+
+                </tbody>
                 </table>
 
-                <button type="button"  onclick="process()" class="btn btn-info btn-md">Search
+                <button type="button" onclick="process()" class="btn btn-info btn-md">Search
                 </button>
 
             </div>
@@ -134,11 +137,52 @@ if (!isLoggedIn()) {
         </div>
         <div class="col-md-8">
 
-               <div id="result2">
+            <div id="result2">
+                <div class="col-md-8">
 
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h2 class="text-justify panel-title">System Overview</h2></div>
+                        <div class="panel-body">
+                            <span class="text-primary bg-success"> </span>
+                            <img src="assets/patientassets/img/3.png">
+                            <img src="assets/patientassets/img/2.png">
+                            <p style="text-align: left;">Smart Diagnosis System allows patients to diagnoised them from
+                                the symptoms.
+                                Disease output is based on the symptoms from the Patients.</p>
+                            <p style="text-align: left;">System also allows Patients to book for Appointment from the
+                                Doctors nearest to their point of system use.</p>
+                            <p></p>
+                        </div>
+                    </div>
 
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h2 class="text-justify panel-title">Health Tips</h2></div>
+                        <div class="panel-body">
+                            <h4>Get Enough Sleep</h4>
+                            <p style="text-align: left;">Poor sleep can drive insulin resistance,
+                                throw your appetite hormones out of whack and
+                                reduce your physical and mental performance </p>
+                            <h4>Drink More Water</h4>
+                            <p style="text-align: left;">
+                                The best time to drink water is half an hour before meals. One study
+                                showed that half a liter of water,
+                                30 minutes before each meal,
+                                increased weight loss by 44%.
+                            </p>
+                            <h4>Eat Vegetables and Fruits</h4>
+                            <p style="text-align: left;">
+                                Vegetables and fruits are the "default" health foods, and for good reason.
+                            </p>
 
-               </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
         </div>
 
@@ -150,23 +194,23 @@ if (!isLoggedIn()) {
 <script src="assets/patientassets/bootstrap/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
-    $(document).ready(function(){
-        $("#spinner").bind("ajaxSend", function() {
+    $(document).ready(function () {
+        $("#spinner").bind("ajaxSend", function () {
             $(this).show();
-        }).bind("ajaxStop", function() {
+        }).bind("ajaxStop", function () {
             $(this).hide();
-        }).bind("ajaxError", function() {
+        }).bind("ajaxError", function () {
             $(this).hide();
         });
 
     });
 </script>
 <script type="text/javascript">
-    $(document).ready(setTimeout(function(){
-        $('#button-submit').click(function() {
+    $(document).ready(setTimeout(function () {
+        $('#button-submit').click(function () {
             $('#spinner').show();
         });
-    }),1000);
+    }), 1000);
 
 </script>
 <script src="assets/js/jquery-1.12.3.min.js"></script>
@@ -184,7 +228,11 @@ if (!isLoggedIn()) {
                     url: "searchProcessor.php",
                     success: function (response) {
                         $(".result").slideDown().html(response);
+
+
                     }
+
+
                 })
 
             } else {
@@ -198,7 +246,7 @@ if (!isLoggedIn()) {
     })
 
     function getLocation() {
-        alert("Allow site to track location");
+
         if (navigator.geolocation) {
             navigator.geolocation.watchPosition(showPosition);
         } else {
@@ -221,7 +269,7 @@ if (!isLoggedIn()) {
     }
 
     function process() {
-
+        getLocation();
         $.post("addSymptom.php", {},
 
             function (data) {
@@ -231,21 +279,22 @@ if (!isLoggedIn()) {
             });
     }
 
-    $(function() {
-        $(".delete").click(function(){
+    $(function () {
+        $(".delete").click(function () {
             var element = $(this);
             var id = element.attr("id");
 
-            if(confirm("Are you sure you want to delete this?"))
-            {
+            if (confirm("Are you sure you want to delete this?")) {
                 $.ajax({
                     type: "POST",
                     url: "deleteSymptom.php",
                     data: ({id: id}),
-                    success: function(){
+                    success: function () {
                     }
                 });
-                $(this).parent().parent().fadeOut(300, function(){ $(this).remove();});
+                $(this).parent().parent().fadeOut(300, function () {
+                    $(this).remove();
+                });
             }
             return false;
         });

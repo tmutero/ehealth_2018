@@ -34,7 +34,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span></button>
-				<a class="navbar-brand" href="#"><span>E-health</span>Admin</a>
+				<a class="navbar-brand" href="home.php"><span>E-health</span>Admin</a>
 				<ul class="nav navbar-top-links navbar-right">
 						
 						
@@ -73,7 +73,7 @@
 			<li><a href="view_doctors.php"><em class="fa fa-calendar">&nbsp;</em> Doctors</a></li>
 			<li><a href="view_facility.php"><em class="fa fa-bar-chart">&nbsp;</em>Facilities</a></li>
 			<li><a href="create_user.php"><em class="fa fa-bar-chart">&nbsp;</em> Create User</a></li>
-			<li><a href="feedback.php"><em class="fa fa-calendar">&nbsp;</em> Feedback</a></li>
+			<li><a href="report.php"><em class="fa fa-calendar">&nbsp;</em> Report</a></li>
 			
 			
 			<li><a href="home.php?logout='1'" >&nbsp;</em> Logout</a></li>
@@ -229,14 +229,14 @@
 		</div><!--/.row-->
 	</div>	<!--/.main-->
 	
-	<script src="assets/js/jquery-1.11.1.min.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-	<script src="assets/js/chart.min.js"></script>
-	<script src="assets/js/chart-data.js"></script>
-	<script src="assets/js/easypiechart.js"></script>
-	<script src="assets/js/easypiechart-data.js"></script>
-	<script src="assets/js/bootstrap-datepicker.js"></script>
-	<script src="assets/js/custom.js"></script>
+	<script src="../assets/js/jquery-1.11.1.min.js"></script>
+	<script src="../assets/js/bootstrap.min.js"></script>
+	<script src="../assets/js/chart.min.js"></script>
+	<script src="../assets/js/chart-data.js"></script>
+	<script src="../assets/js/easypiechart.js"></script>
+	<script src="../assets/js/easypiechart-data.js"></script>
+	<script src="../assets/js/bootstrap-datepicker.js"></script>
+	<script src="../assets/js/custom.js"></script>
 	<script>
 		window.onload = function () {+
 	var chart1 = document.getElementById("line-chart").getContext("2d");

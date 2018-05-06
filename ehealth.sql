@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2018 at 05:38 PM
+-- Generation Time: May 06, 2018 at 11:51 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 5.6.33
 
@@ -36,17 +36,6 @@ CREATE TABLE `appointment` (
   `status` char(20) NOT NULL,
   `comment` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `appointment`
---
-
-INSERT INTO `appointment` (`id`, `date_created`, `patient_id`, `doctor_id`, `status`, `comment`) VALUES
-(1, '2018-04-26 14:37:50', 1, 1, '1', 'comment'),
-(2, '2018-04-26 14:38:09', 4, 1, '1', 'weleom'),
-(3, '2018-04-26 14:38:54', 4, 1, '1', 'Severe Headache'),
-(4, '2018-04-26 14:39:54', 4, 1, '1', 'Weleocmen '),
-(5, '2018-04-26 15:34:46', 4, 1, '1', 'kdkjf');
 
 -- --------------------------------------------------------
 
@@ -92,7 +81,18 @@ INSERT INTO `disease` (`id`, `disease`, `notes`, `cutoff`, `date_created`) VALUE
 (3, 'Typhoid', '', '3', '2018-Apr-Mon'),
 (4, 'Yellow Fever', '', '4', '2018-Apr-Mon'),
 (5, 'Ebola', '', '2', '2018-Apr-Mon'),
-(6, 'Tuberculosis', '', '4', '2018-Apr-Mon');
+(6, 'Tuberculosis', '', '4', '2018-Apr-Mon'),
+(7, 'Whooping cough', '', '', '2018-May-Sun'),
+(8, 'Measles', '', '', '2018-May-Sun'),
+(9, 'Hepatitis A', '', '', '2018-May-Sun'),
+(10, 'Influenza', '', '', '2018-May-Sun'),
+(11, 'Asthma', '', '', '2018-May-Sun'),
+(12, 'Chickenpox', '', '', '2018-May-Sun'),
+(13, 'Meningococcal Meningitis', '', '', '2018-May-Sun'),
+(14, 'Scabies', '', '', '2018-May-Sun'),
+(15, 'Lymphoma', '', '', '2018-May-Sun'),
+(16, 'Mumps', '', '', '2018-May-Sun'),
+(17, 'Leukemia', '', '', '2018-May-Sun');
 
 -- --------------------------------------------------------
 
@@ -133,63 +133,6 @@ CREATE TABLE `future` (
   `found` tinyint(1) NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `future`
---
-
-INSERT INTO `future` (`id`, `symptom`, `time`, `found`, `user_id`) VALUES
-(1, 'fever', '2018-04-24 11:19:29', 1, 4),
-(2, 'Jaundice_or_Yellow', '2018-04-24 11:19:35', 1, 4),
-(3, 'fatigue', '2018-04-24 11:19:56', 1, 4),
-(4, 'Stomach_Pain', '2018-04-24 11:19:59', 1, 4),
-(5, 'chest_pain', '2018-04-24 11:20:15', 1, 4),
-(6, 'Night_Sweats', '2018-04-24 11:20:19', 1, 4),
-(7, 'Constipation', '2018-04-24 18:18:19', 1, 4),
-(8, 'Dull_frontal_headache', '2018-04-24 18:18:24', 1, 4),
-(9, 'fever', '2018-04-25 20:09:45', 1, 4),
-(10, 'Muscle_pain', '2018-04-25 20:09:50', 1, 4),
-(11, 'fever', '2018-04-25 20:11:39', 1, 4),
-(12, 'Muscle_pain', '2018-04-25 20:11:43', 1, 4),
-(13, 'fever', '2018-04-25 20:15:02', 1, 4),
-(14, 'Jaundice_or_Yellow', '2018-04-25 20:15:06', 1, 4),
-(15, 'Cold', '2018-04-25 20:16:30', 1, 4),
-(16, 'Jaundice_or_Yellow', '2018-04-25 20:17:02', 1, 4),
-(17, 'fatigue', '2018-04-25 20:17:16', 1, 4),
-(18, 'Severe_Headache', '2018-04-25 20:17:20', 1, 4),
-(19, 'Night_Sweats', '2018-04-25 20:17:38', 1, 4),
-(20, 'Hypotension', '2018-04-25 20:21:50', 1, 4),
-(21, 'Jaundice_or_Yellow', '2018-04-25 20:22:01', 1, 4),
-(22, 'Slow_Heart_Beat', '2018-04-25 20:22:15', 1, 4),
-(23, 'fever', '2018-04-25 20:22:49', 1, 4),
-(24, 'Slow_Heart_Beat', '2018-04-25 20:23:05', 1, 4),
-(25, 'fever', '2018-04-25 21:33:13', 1, 4),
-(26, 'Nausea_and_Vomiting', '2018-04-25 21:33:21', 1, 4),
-(27, 'Jaundice_or_Yellow', '2018-04-25 21:33:38', 1, 4),
-(28, 'headache', '2018-04-25 21:33:50', 1, 4),
-(29, 'Nausea_and_Vomiting', '2018-04-25 21:33:54', 1, 4),
-(30, 'Muscle_pain', '2018-04-25 21:34:01', 1, 4),
-(31, 'Fever', '2018-04-25 21:34:09', 1, 4),
-(32, 'chest_pain', '2018-04-25 21:34:23', 1, 4),
-(33, 'Night_Sweats', '2018-04-25 21:34:26', 1, 4),
-(34, 'fatigue', '2018-04-25 21:36:54', 1, 4),
-(35, 'Cough_up_blood', '2018-04-25 21:37:03', 1, 4),
-(36, 'Vomiting', '2018-04-25 21:37:14', 1, 4),
-(37, 'fever', '2018-04-26 02:46:35', 1, 4),
-(38, 'Headache', '2018-04-26 02:46:43', 1, 4),
-(39, 'fatigue', '2018-04-26 02:47:25', 1, 4),
-(40, 'Cough_up_blood', '2018-04-26 02:47:32', 1, 4),
-(41, 'chest_pain', '2018-04-26 02:47:51', 1, 4),
-(42, 'Night_Sweats', '2018-04-26 02:47:55', 1, 4),
-(43, 'fever', '2018-04-26 14:21:41', 1, 4),
-(44, 'fever', '2018-04-26 14:21:41', 1, 4),
-(45, 'Jaundice_or_Yellow', '2018-04-26 14:21:48', 1, 4),
-(46, 'fever', '2018-04-26 14:39:32', 1, 4),
-(47, 'Nausea_and_Vomiting', '2018-04-26 14:39:36', 1, 4),
-(48, 'fatigue', '2018-04-26 15:34:16', 1, 4),
-(49, 'Muscle_Pain', '2018-04-26 15:34:21', 1, 4),
-(50, 'Abnormal_Pain', '2018-04-26 15:36:24', 1, 4),
-(51, 'Severe_Headache', '2018-04-26 15:36:42', 1, 4);
 
 -- --------------------------------------------------------
 
@@ -239,37 +182,84 @@ CREATE TABLE `symptoms` (
 --
 
 INSERT INTO `symptoms` (`id`, `name`, `notes`, `date_created`, `disease_id`) VALUES
-(1, 'Fever', 'Fever', '2018-Apr-Mon', 1),
+(1, 'Loss of appetite', 'Fever', '2018-Apr-Mon', 1),
 (2, 'Headache', 'Headache', '2018-Apr-Mon', 1),
 (3, 'Weakness', 'weakness', '2018-Apr-Mon', 1),
-(4, 'Muscle_pain', 'Muscle pain', '2018-Apr-Mon', 1),
-(5, 'Cold', 'cold', '2018-Apr-Mon', 1),
-(6, 'Nausea_and_Vomiting', 'Nausea and Vomiting', '2018-Apr-Mon', 1),
-(7, 'Watery_diarrhea', 'Watery diarrhea', '2018-Apr-Mon', 2),
+(4, 'Muscle pain', 'Muscle pain', '2018-Apr-Mon', 1),
+(5, 'Profuse sweating', 'cold', '2018-Apr-Mon', 1),
+(6, 'Nausea and Vomiting', 'Nausea and Vomiting', '2018-Apr-Mon', 1),
+(7, 'Watery diarrhea', 'Watery diarrhea', '2018-Apr-Mon', 2),
 (8, 'Vomiting', 'Vomiting', '2018-Apr-Mon', 2),
-(9, 'Stomach_Pain', 'Stomach Pain', '2018-Apr-Mon', 2),
-(10, 'Fatigue', 'Fatigue', '2018-Apr-Mon', 2),
-(11, 'High_Fever', 'High Fever', '2018-Apr-Mon', 3),
-(12, 'Abnormal_Pain', 'Abnormal Pain', '2018-Apr-Mon', 3),
+(9, 'Stomach Pain', 'Stomach Pain', '2018-Apr-Mon', 2),
+(10, 'Dehydration', 'Dehydration', '2018-Apr-Mon', 2),
+(11, 'High Fever', 'High Fever', '2018-Apr-Mon', 3),
+(12, 'Abnormal Pain', 'Abnormal Pain', '2018-Apr-Mon', 3),
 (13, 'Constipation', 'Constipation', '2018-Apr-Mon', 3),
 (14, 'Cough', 'Cough', '2018-Apr-Mon', 3),
-(15, 'Dull_frontal_headache', 'Dull frontal headache', '2018-Apr-Mon', 3),
+(15, 'Dull frontal headache', 'Dull frontal headache', '2018-Apr-Mon', 3),
 (16, 'Fever', 'Fever', '2018-Apr-Mon', 4),
-(17, 'Jaundice_or_Yellow Skin', 'Jaundice or Yellow Skin', '2018-Apr-Mon', 4),
+(17, 'Jaundice or Yellow Skin', 'Jaundice or Yellow Skin', '2018-Apr-Mon', 4),
 (18, 'Vomiting', 'Vomiting', '2018-Apr-Mon', 4),
 (19, 'Hypotension', 'Hypotension', '2018-Apr-Mon', 4),
-(20, 'Slow_Heart_Beat', 'Slow Heart Beat', '2018-Apr-Mon', 4),
-(21, 'Fever', 'Fever', '2018-Apr-Mon', 5),
-(22, 'Muscle_Pain', 'Muscle Pain', '2018-Apr-Mon', 5),
-(23, 'Severe_Headache', 'Severe Headache', '2018-Apr-Mon', 5),
-(24, 'Weakness', 'Weakness', '2018-Apr-Mon', 5),
-(25, 'Fatigue', 'Fatigue', '2018-Apr-Mon', 5),
-(26, 'Abnormal_Pain', 'Abnormal Pain', '2018-Apr-Mon', 5),
-(27, 'Cough_up_blood', 'Cough up blood', '2018-Apr-Mon', 6),
-(28, 'Chest_Pain', 'Chest Pain', '2018-Apr-Mon', 6),
-(29, 'Night_Sweats', 'Night Sweats', '2018-Apr-Mon', 6),
-(30, 'Fever', 'Fever', '2018-Apr-Mon', 6),
-(31, 'Fatigue', 'Fatigue', '2018-Apr-Mon', 6);
+(20, 'Slow Heart Beat', 'Slow Heart Beat', '2018-Apr-Mon', 4),
+(21, 'Joint and muscle pain', 'Fever', '2018-Apr-Mon', 5),
+(22, 'Severe muscle weakness\r\n', 'Muscle Pain', '2018-Apr-Mon', 5),
+(23, 'Severe Headache', 'Severe Headache', '2018-Apr-Mon', 5),
+(24, 'Sore throat', 'Weakness', '2018-Apr-Mon', 5),
+(25, 'Diarrhoea\r\n', 'Diarrhoea\r\n', '2018-Apr-Mon', 5),
+(26, 'Abnormal Pain', 'Abnormal Pain', '2018-Apr-Mon', 5),
+(27, 'Cough up blood', 'Cough up blood', '2018-Apr-Mon', 6),
+(28, 'Chest Pain', 'Chest Pain', '2018-Apr-Mon', 6),
+(29, 'Night Sweats', 'Night Sweats', '2018-Apr-Mon', 6),
+(30, 'Chills', 'Chills', '2018-Apr-Mon', 6),
+(31, 'Fatigue', 'Fatigue', '2018-Apr-Mon', 6),
+(32, 'Runny nose', 'runny nose', '2018-May-Sun', 8),
+(33, 'Eye problems', 'eye problems', '2018-May-Sun', 8),
+(34, 'Rash\r\n', 'cough', '2018-May-Sun', 8),
+(35, 'Rash', 'rash', '2018-May-Sun', 8),
+(36, 'Muscular aches', 'muscular aches', '2018-May-Sun', 8),
+(37, 'Runny nose', 'runny nose', '2018-May-Sun', 7),
+(38, 'Persistent cough', 'persistent cough', '2018-May-Sun', 7),
+(39, 'Whoop vomiting', 'whoop vomiting', '2018-May-Sun', 7),
+(40, 'Breathlessness', 'breathlessness', '2018-May-Sun', 7),
+(41, 'Nausea', 'Nausea', '2018-May-Sun', 9),
+(42, 'Stomach pains', 'stomach pains', '2018-May-Sun', 9),
+(43, 'Jaundice', 'Jaundice', '2018-May-Sun', 9),
+(44, 'Joint pain', 'joint pain', '2018-May-Sun', 9),
+(45, 'Low-grade fever', 'Low-grade fever', '2018-May-Sun', 9),
+(46, 'Difficulty breathing', 'Difficulty breathing', '2018-May-Sun', 11),
+(47, 'Chest tightness', 'Chest tightness', '2018-May-Sun', 11),
+(48, 'Shortness of breath', 'Shortness of breath', '2018-May-Sun', 11),
+(49, 'Wheezing', 'Wheezing', '2018-May-Sun', 11),
+(50, 'Coughing', 'coughing', '2018-May-Sun', 11),
+(51, 'Sore throat', 'Sore throat', '2018-May-Sun', 10),
+(52, 'Body aches.', 'body aches.', '2018-May-Sun', 10),
+(53, 'Headaches', 'Headaches', '2018-May-Sun', 10),
+(54, 'Nasal congestion', 'Nasal congestion', '2018-May-Sun', 10),
+(55, 'Sneezing', 'sneezing', '2018-May-Sun', 10),
+(56, 'Neck stiffness', 'Neck stiffness', '2018-May-Sun', 13),
+(57, 'Discomfort in bright lights', 'Discomfort in bright lights', '2018-May-Sun', 13),
+(58, 'Difficulty awakening', 'difficulty awakening', '2018-May-Sun', 13),
+(59, 'Persistent headache', 'persistent headache', '2018-May-Sun', 13),
+(60, 'Joint pain', 'Joint pain', '2018-May-Sun', 13),
+(61, 'Soles of the feet', 'soles of the feet', '2018-May-Sun', 14),
+(62, 'Itchy rash', 'itchy rash', '2018-May-Sun', 14),
+(63, 'Skin rash', 'skin rash', '2018-May-Sun', 14),
+(64, 'Sweating and chills', 'sweating and chills', '2018-May-Sun', 15),
+(65, 'Chest pain or pressure', 'chest pain or pressure', '2018-May-Sun', 15),
+(66, 'shortness of breath', 'shortness of breath', '2018-May-Sun', 15),
+(67, 'Swollen abdomen', 'swollen abdomen', '2018-May-Sun', 15),
+(68, 'Enlarged lumps', 'enlarged lumps', '2018-May-Sun', 15),
+(69, 'Painful salivary glands', 'painful salivary gland', '2018-May-Sun', 16),
+(70, 'Swollen', 'Swollen', '2018-May-Sun', 16),
+(71, 'Pain in Chewing', 'Pain', '2018-May-Sun', 16),
+(72, 'Swelling in front of ear', 'swelling in front of ear', '2018-May-Sun', 16),
+(73, 'Swollen lymph nodes', 'Swollen lymph nodes', '2018-May-Sun', 17),
+(74, 'Persistent fatigue', 'persistent fatigue', '2018-May-Sun', 17),
+(75, 'Recurrent nose bleed', 'recurrent nose bleed', '2018-May-Sun', 17),
+(76, 'Bone pains or tenderness', 'bone pains or tenderness', '2018-May-Sun', 17),
+(77, 'Easy bleeding', 'easy bleeding', '2018-May-Sun', 17),
+(78, 'Cold', '', NULL, 5);
 
 -- --------------------------------------------------------
 
@@ -311,7 +301,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `username`, `email`, `user_type`, `password`, `date_create`, `longitude`, `latitude`) VALUES
 (2, 'admin', 'admin@gmail.com', 'admin', 'admin', '2018-04-19 02:05:50', '0.000000', '0.000000'),
 (3, 't', 't@gmail.com', 'admin', 'e358efa489f58062f10dd7316b65649e', '2018-04-19 02:05:50', '0.000000', '0.000000'),
-(4, 'tafadzwa', 'tafadzwa@gmail.com', 'user', '154072a750541f54250de83a125003a4', '2018-04-24 11:20:16', '31.346814', '-17.291441'),
+(4, 'tafadzwa', 'tafadzwa@gmail.com', 'user', '154072a750541f54250de83a125003a4', '2018-05-06 21:51:33', '31.346804', '-17.291407'),
 (5, 'tafadzwa', 'tafadzwa@yahoo.com', 'user', '154072a750541f54250de83a125003a4', '2018-04-19 02:05:50', '0.000000', '0.000000'),
 (6, 'wadza', 'wadzwa@yahoo.com', 'user', '3a912fdb3a2866feb8f002c72a8f2ae5', '2018-04-19 02:05:50', '0.000000', '0.000000'),
 (7, 'tanaka', 'tanaka@gmail.com', 'user', '0292e031195ca50fed149b421c7df329', '2018-04-19 02:05:50', '0.000000', '0.000000'),
@@ -320,7 +310,9 @@ INSERT INTO `users` (`id`, `username`, `email`, `user_type`, `password`, `date_c
 (12, 'b1440945', 't@yahoo.com', 'user', '92eb5ffee6ae2fec3ad71c777531578f', '2018-04-21 08:27:59', '0.000000', '0.000000'),
 (13, 'beura', 'eve@gmail.com', 'user', 'fa6a91ef9baa242de0b354a212e8cf82', '2018-04-23 20:36:09', '0.000000', '0.000000'),
 (14, 'eve', 'beuraeve@gmail.com', 'user', 'fa6a91ef9baa242de0b354a212e8cf82', '2018-04-23 20:34:51', '0.000000', '0.000000'),
-(15, 'kossam', 'kossam@gmail.com', 'user', 'cdb0cca70d02c44dc6a818deae8f366d', '2018-04-24 03:07:12', '31.346778', '-17.291423');
+(15, 'kossam', 'kossam@gmail.com', 'user', 'cdb0cca70d02c44dc6a818deae8f366d', '2018-04-24 03:07:12', '31.346778', '-17.291423'),
+(16, 'Lee', 'lee@gmail.com', 'user', 'b0f8b49f22c718e9924f5b1165111a67', '2018-05-06 21:15:56', '31.346788', '-17.291418'),
+(17, 'Kossam', 'kossam@gmail.com', 'user', 'cdb0cca70d02c44dc6a818deae8f366d', '2018-05-06 21:17:58', '31.346787', '-17.291411');
 
 --
 -- Indexes for dumped tables
@@ -358,6 +350,7 @@ ALTER TABLE `facility`
 --
 ALTER TABLE `future`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `symptom` (`symptom`),
   ADD KEY `user_id` (`user_id`);
 
 --
@@ -396,7 +389,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `city`
@@ -408,7 +401,7 @@ ALTER TABLE `city`
 -- AUTO_INCREMENT for table `disease`
 --
 ALTER TABLE `disease`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `facility`
@@ -420,7 +413,7 @@ ALTER TABLE `facility`
 -- AUTO_INCREMENT for table `future`
 --
 ALTER TABLE `future`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=293;
 
 --
 -- AUTO_INCREMENT for table `practitioner`
@@ -432,19 +425,19 @@ ALTER TABLE `practitioner`
 -- AUTO_INCREMENT for table `symptoms`
 --
 ALTER TABLE `symptoms`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT for table `tmp`
 --
 ALTER TABLE `tmp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=576;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
